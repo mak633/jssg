@@ -33,7 +33,7 @@ const fontSans = FontSans({
 });
 
 export const metadata: Metadata = {
-  title: 'Marketplace',
+  title: 'Portal',
 };
 
 export default async function RootLayout({

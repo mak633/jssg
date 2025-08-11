@@ -32,7 +32,7 @@ const fontSans = FontSans({
 });
 
 export const metadata: Metadata = {
-  title: 'Portal',
+  title: 'Admin',
 };
 
 const sections: NavSection[] = [

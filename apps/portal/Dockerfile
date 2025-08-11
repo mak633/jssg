@@ -1,6 +1,6 @@
 FROM node:20-alpine AS base
 
-ENV APP_NAME="marketplace"
+ENV APP_NAME="portal"
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable && corepack prepare pnpm@9.1.4 --activate
