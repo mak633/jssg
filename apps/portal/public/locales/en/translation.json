@@ -1,0 +1,17 @@
+{
+  "app": {
+    "Weekly Quiz": "Weekly Quiz"
+  },
+  "quiz": {
+    "title": "Weekly Quiz",
+    "description": "Test your knowledge with our weekly quiz!",
+    "question": "What is the capital of France?",
+    "options": {
+      "a": "Berlin",
+      "b": "Madrid",
+      "c": "Paris",
+      "d": "Rome"
+    },
+    "submit": "Submit"
+  }
+}
