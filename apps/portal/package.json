@@ -1,0 +1,41 @@
+{
+  "name": "marketplace",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack --port 2001",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint --dir .",
+    "lint:fix": "next lint --dir . --fix",
+    "e2e": "playwright"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "catalog:",
+    "@tanstack/react-table": "catalog:",
+    "@ui/shared": "workspace:*",
+    "axios": "1.11.0",
+    "i18next": "catalog:",
+    "next": "catalog:",
+    "next-i18next": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "react-hook-form": "catalog:",
+    "react-i18next": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.53.0",
+    "@tailwindcss/postcss": "catalog:",
+    "@tanstack/react-query-devtools": "5.76.2",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "@ui/config": "workspace:*",
+    "@ui/eslint-config": "workspace:*",
+    "autoprefixer": "10.4.21",
+    "postcss": "catalog:",
+    "tailwindcss": "catalog:",
+    "typescript": "catalog:"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "app": {
+    "terms_of_use": "Terms of use"
+  },
+  "login": {
+    "title": "Login",
+    "subtitle": "Welcome back! Please enter your credentials.",
+    "register": "Register"
+  },
+  "registration": {
+    "title": "Registration",
+    "subtitle": "Create a new account.",
+    "sign_up": "Sign up",
+    "first_name": "First Name",
+    "last_name": "Last Name"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong.",
+    "or": "or",
+    "email": "Email",
+    "password": "Password",
+    "sign_up": "Sign up",
+    "sign_in": "Sign in"
+  }
+}

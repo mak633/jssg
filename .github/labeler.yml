@@ -1,0 +1,19 @@
+login:
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'apps/login/**/*'
+
+portal:
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'apps/portal/**/*'
+
+admin:
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'apps/admin/**/*'
+
+sdk:
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'packages/**/*'

@@ -1,0 +1,24 @@
+name: Close stale pull requests
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+permissions:
+  issues: write
+  pull-requests: write
+
+jobs:
+  close_stale_prs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/stale@v9
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          days-before-pr-stale: 30
+          days-before-pr-close: 0
+          close-pr-message: >
+            Closing because this PR has had no activity for 30 days.
+          days-before-issue-stale: -1
+          exempt-pr-labels: "wip,do-not-close"

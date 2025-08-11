@@ -1,0 +1,26 @@
+{
+  "app": {
+    "terms_of_use": "app.terms_of_use"
+  },
+  "login": {
+    "title": "login.title",
+    "subtitle": "login.subtitle",
+    "register": "login.register"
+  },
+  "registration": {
+    "title": "registration.title",
+    "subtitle": "registration.subtitle",
+    "sign_up": "registration.sign_up",
+    "first_name": "registration.first_name",
+    "last_name": "registration.last_name"
+  },
+  "common": {
+    "loading": "common.loading",
+    "error": "common.error",
+    "or": "common.or",
+    "email": "common.email",
+    "password": "common.password",
+    "sign_up": "common.sign_up",
+    "sign_in": "common.sign_in"
+  }
+}

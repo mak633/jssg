@@ -1,0 +1,41 @@
+{
+  "name": "login",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack --port 2000",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint --dir .",
+    "lint:fix": "next lint --dir . --fix",
+    "e2e": "playwright"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "catalog:",
+    "@ui/shared": "workspace:*",
+    "axios": "1.11.0",
+    "i18next": "catalog:",
+    "i18next-browser-languagedetector": "^8.2.0",
+    "next": "catalog:",
+    "next-i18next": "catalog:",
+    "react": "catalog:",
+    "react-cookie": "8.0.1",
+    "react-dom": "catalog:",
+    "react-hook-form": "catalog:",
+    "react-i18next": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.53.0",
+    "@tailwindcss/postcss": "catalog:",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "@ui/config": "workspace:*",
+    "@ui/eslint-config": "workspace:*",
+    "autoprefixer": "10.4.21",
+    "postcss": "catalog:",
+    "tailwindcss": "catalog:",
+    "typescript": "catalog:"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": ["tsconfig.json"],
+  "tasks": {
+    "build": {
+      "outputs": ["dist/**", ".next/**", "!.next/cache/**", "public/dist/**"],
+      "env": [
+        "PORT",
+        "RUNTIME_ENVIRONMENT",
+        "PLAYWRIGHT_USER_EMAIL",
+        "PLAYWRIGHT_USER_PASSWORD",
+        "NEXT_PUBLIC_IDENTITY_SERVICE_BASE_URL",
+        "NEXT_PUBLIC_LOGIN_UI_BASE_URL",
+        "NEXT_PUBLIC_API_GATEWAY_BASE_URL",
+        "NEXT_PUBLIC_PORTAL_UI_BASE_URL",
+        "NEXT_PUBLIC_ADMIN_UI_BASE_URL"
+      ],
+      "dependsOn": ["^build"]
+    },
+    "lint": {
+      "dependsOn": ["^lint"]
+    },
+    "lint:fix": {
+      "dependsOn": ["^build"]
+    },
+    "clean": {
+      "cache": false
+    }
+  }
+}
