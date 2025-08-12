@@ -15,6 +15,7 @@ catalog:
   next-i18next: 15.4.2
   react-i18next: 15.6.1
   i18next-browser-languagedetector: 8.2.0
+  react-cookie: 8.0.1
   '@tailwindcss/postcss': 4.1.11
   '@hookform/resolvers': 3.9.0
   '@types/react': 19.1.8

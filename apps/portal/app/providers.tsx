@@ -3,6 +3,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { PropsWithChildren, useState } from 'react';
+import { CookiesProvider } from 'react-cookie';
 import { z } from 'zod';
 
 import { ThemeProvider } from '@shared/components/theme-provider';
@@ -35,14 +36,16 @@ export function Providers({
 
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthProvider user={user}>
-        <ThemeProvider
-          initialTheme={initialTheme}
-          initialColorMode={initialColorMode}
-        >
-          {children}
-        </ThemeProvider>
-      </AuthProvider>
+      <CookiesProvider>
+        <AuthProvider user={user}>
+            <ThemeProvider
+              initialTheme={initialTheme}
+              initialColorMode={initialColorMode}
+            >
+            {children}
+          </ThemeProvider>
+        </AuthProvider>
+      </CookiesProvider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );

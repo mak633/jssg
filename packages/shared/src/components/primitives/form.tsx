@@ -1,10 +1,8 @@
 'use client';
 
-import { ref } from 'process';
 
 import * as LabelPrimitive from '@radix-ui/react-label';
 import { Slot } from '@radix-ui/react-slot';
-import { CalendarIcon } from 'lucide-react';
 import * as React from 'react';
 import {
   Controller,
@@ -19,14 +17,9 @@ import {
 import { Label } from '@shared/components/primitives/label';
 import {
   cn,
-  convertLocalToUTCDate,
-  convertUTCToLocalDate,
-  formatDate,
 } from '@shared/lib/utils';
 
 import { Button, ButtonProps } from './button';
-import { Calendar, CalendarProps } from './calendar';
-import { Popover, PopoverContent, PopoverTrigger } from './popover';
 
 const Form = FormProvider;
 
@@ -186,61 +179,6 @@ function FormSubmitButton({
   );
 }
 
-type FormSingleCalendarProps = CalendarProps & {
-  value: Date | undefined | null;
-  onChange: (val?: Date) => void;
-  className?: string;
-  placeholder?: string;
-  disabledInput?: boolean;
-};
-function FormSingleCalendar({
-  value,
-  onChange,
-  disabled,
-  className,
-  placeholder,
-  disabledInput,
-}: FormSingleCalendarProps) {
-  const [calendarOpen, setCalendarOpen] = React.useState<boolean>(false);
-
-  return (
-    <Popover open={calendarOpen} onOpenChange={setCalendarOpen}>
-      <PopoverTrigger asChild>
-        <FormControl>
-          <Button
-            ref={ref}
-            variant="outline"
-            disabled={disabledInput}
-            className={cn(
-              'pl-3 text-left font-normal',
-              !value && 'text-muted-foreground',
-              className
-            )}
-          >
-            {value ? (
-              formatDate(value)
-            ) : (
-              <span>{placeholder ?? 'Pick a date'}</span>
-            )}
-            <CalendarIcon className="ml-auto size-4 opacity-50" />
-          </Button>
-        </FormControl>
-      </PopoverTrigger>
-      <PopoverContent className="w-auto p-0" align="start">
-        <Calendar
-          mode="single"
-          selected={convertUTCToLocalDate(value)}
-          onSelect={(v) => {
-            onChange(convertLocalToUTCDate(v));
-            setCalendarOpen(false);
-          }}
-          disabled={disabled}
-        />
-      </PopoverContent>
-    </Popover>
-  );
-}
-
 export {
   useFormField,
   Form,
@@ -251,5 +189,4 @@ export {
   FormMessage,
   FormField,
   FormSubmitButton,
-  FormSingleCalendar,
 };

@@ -2,15 +2,11 @@ import '@shared/globals.css';
 
 import { Inter as FontSans } from 'next/font/google';
 import { cookies } from 'next/headers';
-import { PropsWithChildren, Suspense } from 'react';
+import Image from 'next/image';
+import { PropsWithChildren } from 'react';
 
-import { TopLoader } from '@shared/components/primitives/next-top-loader';
-import { SidebarInset } from '@shared/components/primitives/sidebar';
 import { Toaster } from '@shared/components/primitives/sonner';
-import { Content } from '@shared/components/ui/layout/content';
-import { Header } from '@shared/components/ui/layout/header';
-import { Layout } from '@shared/components/ui/layout/layout';
-import { AppSidebar } from '@shared/components/ui/layout/sidebar';
+import { ThemeToggle } from '@shared/components/ui/theme-toggle';
 import { dummyToken } from '@shared/lib/dummy-data';
 import {
   defaultThemePresets,
@@ -21,7 +17,6 @@ import { cn, getUser } from '@shared/lib/utils';
 import { ColorMode } from '@shared/types';
 
 import { environment } from '@/environment';
-import NavSections from '@/infrastructure/routes/nav-sections';
 
 import { Providers } from './providers';
 
@@ -62,31 +57,28 @@ export default async function RootLayout({
       </head>
       <body
         className={cn(
-          'bg-background min-h-screen font-sans antialiased',
+          'bg-background min-h-screen bg-cover bg-center font-sans antialiased',
+          'bg-[url(https://wealth.jsafrasarasin.com/public/assets/bjss/assets/images/08.jpg)]',
           fontSans.variable
         )}
       >
-        <Providers
-          user={user}
-          initialTheme={currentTheme}
-          initialColorMode={colorMode}
-        >
-          <TopLoader />
-          <Layout>
-            <AppSidebar sections={NavSections} />
-            <SidebarInset className="overflow-x-auto">
-              <Header>
-                <div className="flex items-center justify-end gap-2">
-                  <div className="mr-2"></div>
-                </div>
-              </Header>
-              <Content>
-                <Suspense>{children}</Suspense>
-              </Content>
-            </SidebarInset>
-          </Layout>
-          <Toaster richColors />
+        <Providers user={user} initialTheme={currentTheme} initialColorMode={colorMode}>
+          <div className="absolute flex w-full items-center justify-between p-6">
+            <ThemeToggle />
+          </div>
+          <div className="-z-1 absolute top-12 flex w-full items-center justify-center">
+            <Image
+              src="https://wealth.jsafrasarasin.com/public/assets/bjss/assets/images/bjss-theme-logo.svg"
+              alt="J. Safra Sarasin logo"
+              width="240"
+              height="96"
+            />
+          </div>
+          <div className="flex h-screen w-full flex-col items-center justify-center">
+            <div className="rounded-4xl min-w-lg bg-white p-12">{children}</div>
+          </div>
         </Providers>
+        <Toaster />
       </body>
     </html>
   );

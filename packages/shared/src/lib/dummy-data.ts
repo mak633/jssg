@@ -1,4 +1,4 @@
-import { QuestionType, Quiz, QuizStatus, UIWidget } from '@shared/types/quiz';
+import { QuestionType, Quiz, QuizStatus } from '@shared/types/quiz';
 import { User, UserRole } from '@shared/types/user';
 
 export const DUMMY_USERS_RECORD = 'dummyUsers';
@@ -77,7 +77,6 @@ export const initialQuiz: Quiz = {
       description: 'Choose the option that best describes you.',
       type: QuestionType.OneChoice,
       required: true,
-      ui: { widget: UIWidget.Radio },
       options: [
         { value: 'professional', label: 'Professional' },
         { value: 'student', label: 'Student' },
@@ -96,12 +95,8 @@ export const initialQuiz: Quiz = {
       id: 'q2_speaker_title',
       title: 'Talk title',
       description: 'Provide the working title of your session.',
-      type: QuestionType.String,
+      type: QuestionType.ShortString,
       requiredWhen: { op: 'eq', qId: 'q1_attendee_type', value: 'speaker' },
-      ui: {
-        widget: UIWidget.Input,
-        placeholder: 'e.g., Practical Type Safety',
-      },
       validation: { minLength: 5, maxLength: 120 },
       nextQuestionId: 'q3_experience_years',
     },
@@ -111,7 +106,6 @@ export const initialQuiz: Quiz = {
       title: 'Years of professional experience',
       type: QuestionType.Number,
       required: true,
-      ui: { widget: UIWidget.Slider },
       validation: { min: 0, max: 50, step: 1 },
       nextQuestionId: 'q4_topics_of_interest',
     },
@@ -122,7 +116,6 @@ export const initialQuiz: Quiz = {
       description: 'Choose all that apply (minimum 2).',
       type: QuestionType.MultipleChoice,
       required: true,
-      ui: { widget: UIWidget.Checkbox },
       options: [
         { value: 'ai', label: 'AI & ML' },
         { value: 'web', label: 'Web Engineering' },
@@ -138,7 +131,6 @@ export const initialQuiz: Quiz = {
       id: 'q5_need_certificate',
       title: 'Do you need a certificate of attendance?',
       type: QuestionType.Boolean,
-      ui: { widget: UIWidget.Switch },
       routing: [
         {
           when: { op: 'isTruthy', qId: 'q5_need_certificate' },
@@ -155,12 +147,8 @@ export const initialQuiz: Quiz = {
     q6_certificate_name: {
       id: 'q6_certificate_name',
       title: 'Full name for the certificate',
-      type: QuestionType.String,
+      type: QuestionType.ShortString,
       requiredWhen: { op: 'isTruthy', qId: 'q5_need_certificate' },
-      ui: {
-        widget: UIWidget.Input,
-        placeholder: 'As it should appear on the certificate',
-      },
       validation: { minLength: 3, maxLength: 80, pattern: "^[\\p{L} .'-]+$" },
       nextQuestionId: 'q7_workshops_opt_in',
     },
@@ -170,7 +158,6 @@ export const initialQuiz: Quiz = {
       title: 'Would you like to attend pre-conference workshops?',
       type: QuestionType.Boolean,
       required: true,
-      ui: { widget: UIWidget.Switch },
       routing: [
         {
           when: { op: 'isTruthy', qId: 'q7_workshops_opt_in' },
@@ -189,8 +176,7 @@ export const initialQuiz: Quiz = {
       title: 'Select at least two workshops',
       description: 'Workshops have limited seats.',
       type: QuestionType.MultipleChoice,
-      requiredWhen: { op: 'eq', qId: 'q7_workshops_opt_in', value: 'yes' },
-      ui: { widget: UIWidget.Checkbox },
+      requiredWhen: { op: 'isTruthy', qId: 'q7_workshops_opt_in' },
       options: [
         { value: 'docker', label: 'Docker Deep Dive' },
         { value: 'data_design', label: 'Designing with Data' },
@@ -206,7 +192,6 @@ export const initialQuiz: Quiz = {
       title: 'Arrival date',
       type: QuestionType.Date,
       required: true,
-      ui: { widget: UIWidget.Date },
       validation: { min: '2025-09-10', max: '2025-10-05' },
       nextQuestionId: 'q10_checkin_time',
     },
@@ -214,8 +199,7 @@ export const initialQuiz: Quiz = {
     q10_checkin_time: {
       id: 'q10_checkin_time',
       title: 'Estimated hotel check-in time',
-      type: QuestionType.DateTime,
-      ui: { widget: UIWidget.DateTime },
+      type: QuestionType.Date,
       validation: { min: '2025-09-10T08:00:00Z', max: '2025-10-05T22:00:00Z' },
       nextQuestionId: 'q11_dietary_preference',
     },
@@ -224,7 +208,6 @@ export const initialQuiz: Quiz = {
       id: 'q11_dietary_preference',
       title: 'Dietary preference',
       type: QuestionType.OneChoice,
-      ui: { widget: UIWidget.Select },
       options: [
         { value: 'none', label: 'None' },
         { value: 'vegetarian', label: 'Vegetarian' },
@@ -241,7 +224,6 @@ export const initialQuiz: Quiz = {
       title: 'T-shirt size',
       type: QuestionType.OneChoice,
       required: true,
-      ui: { widget: UIWidget.Select },
       options: [
         { value: 'xs', label: 'XS' },
         { value: 's', label: 'S' },

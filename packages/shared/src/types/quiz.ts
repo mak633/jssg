@@ -7,29 +7,14 @@ export enum QuizStatus {
 export enum QuestionType {
   OneChoice,
   MultipleChoice,
-  ShortAnswer,
-  Boolean,
+  ShortString,
+  LongString,
   Number,
-  String,
+  Boolean,
   Date,
-  DateTime,
-}
-
-export enum UIWidget {
-  Radio,
-  Checkbox,
-  Select,
-  Switch,
-  Slider,
-  Date,
-  DateTime,
-  Input,
 }
 
 export type Condition =
-  | { op: 'and'; conditions: Condition[] }
-  | { op: 'or'; conditions: Condition[] }
-  | { op: 'not'; condition: Condition }
   | { op: 'isTruthy' | 'isFalsy'; qId: string }
   | { op: 'eq' | 'neq'; qId: string; value: string | number };
 
@@ -47,10 +32,6 @@ interface QuestionBase {
   requiredWhen?: Condition;
   routing?: RouteRule[];
   nextQuestionId?: string | 'END';
-  ui?: {
-    widget?: UIWidget;
-    placeholder?: string;
-  };
 }
 
 export interface ChoiceOption {
@@ -86,12 +67,20 @@ export interface NumberQuestion extends QuestionBase {
   };
 }
 
-export interface StringQuestion extends QuestionBase {
-  type: QuestionType.String;
+export interface ShortStringQuestion extends QuestionBase {
+  type: QuestionType.ShortString;
   validation?: {
     minLength?: number;
     maxLength?: number;
     pattern?: string;
+  };
+}
+
+export interface LongStringQuestion extends QuestionBase {
+  type: QuestionType.LongString;
+  validation?: {
+    minLength?: number;
+    maxLength?: number;
   };
 }
 
@@ -103,22 +92,14 @@ export interface DateQuestion extends QuestionBase {
   };
 }
 
-export interface DateTimeQuestion extends QuestionBase {
-  type: QuestionType.DateTime;
-  validation?: {
-    min?: string;
-    max?: string;
-  };
-}
-
 export type Question =
   | SingleChoiceQuestion
   | MultiChoiceQuestion
   | BooleanQuestion
   | NumberQuestion
-  | StringQuestion
+  | ShortStringQuestion
+  | LongStringQuestion
   | DateQuestion
-  | DateTimeQuestion;
 
 export interface Section {
   id: string;
