@@ -3,11 +3,10 @@ import { useTranslation } from 'react-i18next';
 
 import { useGetCurrentQuiz } from '@/infrastructure/hooks/use-get-quiz';
 
-import { QuizStepper } from './components/quiz-stepper';
-
+import { QuizStepper } from './quiz-stepper/quiz-stepper';
 
 const WeeklyQuiz = () => {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const { data: quiz, isLoading } = useGetCurrentQuiz({});
 
   if (isLoading) {
@@ -19,8 +18,8 @@ const WeeklyQuiz = () => {
   }
 
   return (
-    <div>
-      <h1>{t('quiz.title', { title: quiz.title })}</h1>
+    <div className="flex h-full flex-col">
+      <h1 className="mb-6 text-xl font-semibold">{quiz.title}</h1>
       <QuizStepper quiz={quiz} />
     </div>
   );

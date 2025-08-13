@@ -35,7 +35,10 @@ export function LoginForm() {
 
   const onSubmit: SubmitHandler<LoginInputs> = async (data: LoginInputs) => {
     const users = JSON.parse(localStorage.getItem(DUMMY_USERS_RECORD) || '[]');
-    const existingUser = users.find((user: User) => user.email === data.email && user.password === data.password);
+    const existingUser = users.find(
+      (user: User) =>
+        user.email === data.email && user.password === data.password
+    );
 
     if (existingUser) {
       setCookie(dummyToken, existingUser.token);

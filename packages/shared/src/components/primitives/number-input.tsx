@@ -1,7 +1,5 @@
 import * as React from 'react';
 
-import { cn } from '@shared/lib/utils';
-
 import { Input } from './input';
 
 const FLOATING_POINT_REGEX = /^[Ee0-9+\-.]$/;
@@ -12,17 +10,10 @@ function isFloatingPointNumericCharacter(character: string) {
 
 type InputProps = {
   onChange: (_: number) => void;
-  isTable?: boolean;
   suffix?: string;
 } & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type' | 'onChange'>;
 
-function NumberInput({
-  className,
-  suffix,
-  onChange,
-  isTable,
-  ...props
-}: InputProps) {
+function NumberInput({ className, onChange, ...props }: InputProps) {
   const sanitize = React.useCallback(
     (value: string) =>
       value.split('').filter(isFloatingPointNumericCharacter).join(''),
@@ -47,13 +38,7 @@ function NumberInput({
       pattern="[0-9]*(.[0-9]+)?"
       autoComplete="off"
       autoCorrect="off"
-      className={cn(
-        className,
-        isTable &&
-          '[appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
-      )}
-      isTable={isTable}
-      suffix={suffix}
+      className={className}
       {...props}
       onChange={onInputChange}
     />

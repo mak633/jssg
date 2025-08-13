@@ -14,6 +14,8 @@ export enum QuestionType {
   Date,
 }
 
+export type Answer = string | number | boolean;
+
 export type Condition =
   | { op: 'isTruthy' | 'isFalsy'; qId: string }
   | { op: 'eq' | 'neq'; qId: string; value: string | number };
@@ -99,7 +101,7 @@ export type Question =
   | NumberQuestion
   | ShortStringQuestion
   | LongStringQuestion
-  | DateQuestion
+  | DateQuestion;
 
 export interface Section {
   id: string;

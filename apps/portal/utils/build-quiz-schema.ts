@@ -1,187 +1,250 @@
-import { z } from "zod";
+import { z } from 'zod';
 
-import { Condition, Question, QuestionType, Quiz } from "@shared/types/quiz";
+import { Quiz, QuestionType, Condition } from '@shared/types/quiz';
 
-type Answers = Record<string, unknown>;
+function evaluateCondition(
+  condition: Condition,
+  data: Record<string, unknown>
+): boolean {
+  const value = data[condition.qId];
 
-const literalEnum = (values: string[]) =>
-  values.length > 0
-    ? z.enum(values as [string, ...string[]])
-    : z.string();
-
-const isIsoDateLike = (s: string) => !Number.isNaN(Date.parse(s));
-
-const cmpIso = (a: string, b: string) =>
-  Date.parse(a) - Date.parse(b);
-
-function evalCondition(cond: Condition, answers: Answers): boolean {
-  const v = answers[cond.qId];
-
-  switch (cond.op) {
-    case "isTruthy":
-    case "isFalsy":
-      return !v;
-    case "eq":
-      return v === cond.value;
-    case "neq":
-      return v !== cond.value;
+  switch (condition.op) {
+    case 'eq':
+      return value === condition.value;
+    case 'neq':
+      return value !== condition.value;
+    case 'isTruthy':
+      return Boolean(value);
+    case 'isFalsy':
+      return !value;
     default:
       return false;
   }
 }
 
-function schemaForQuestion(q: Question) {
-  switch (q.type) {
-    case QuestionType.OneChoice: {
-      const allowed = (q.options ?? [])
-        .filter(o => !o.disabled)
-        .map(o => o.value);
-      const s = literalEnum(allowed);
+export function buildQuizSchema(
+  quiz: Quiz
+): z.ZodType<Record<string, unknown>> {
+  return z
+    .object({})
+    .catchall(z.any())
+    .superRefine((data, ctx) => {
+      for (const question of Object.values(quiz.questions)) {
+        const value = data[question.id];
+        let isRequired = question.required || false;
 
-      return s;
-    }
+        if (question.requiredWhen) {
+          const conditionMet = evaluateCondition(question.requiredWhen, data);
+          isRequired = conditionMet;
+        }
 
-    case QuestionType.MultipleChoice: {
-      const allowed = (q.options ?? [])
-        .filter(o => !o.disabled)
-        .map(o => o.value);
-      const elem = literalEnum(allowed);
-      const s = z.array(elem);
-
-      const minSel = q.validation?.minSelections ?? (q.required ? 1 : undefined);
-      const maxSel = q.validation?.maxSelections;
-
-      if (typeof minSel === "number") s.min(minSel, { message: `Select at least ${minSel}` });
-      if (typeof maxSel === "number") s.max(maxSel, { message: `Select at most ${maxSel}` });
-
-      return s;
-    }
-
-    case QuestionType.Boolean: {
-      return z.boolean();
-    }
-
-    case QuestionType.Number: {
-      const s = z.number({
-        invalid_type_error: "Expected a number",
-      });
-      const { min, max } = q.validation ?? {};
-
-      if (typeof min === "number") s.min(min);
-      if (typeof max === "number") s.max(max);
-
-      return s;
-    }
-
-    case QuestionType.ShortString: {
-      const s = z.string();
-      const { minLength, maxLength, pattern } = q.validation ?? {};
-      if (typeof minLength === "number") s.min(minLength);
-      if (typeof maxLength === "number") s.max(maxLength);
-      if (pattern) {
-        const re = new RegExp(pattern, "u");
-        s.regex(re, { message: "Invalid format" });
-      }
-      
-      return s;
-    }
-
-    case QuestionType.LongString: {
-      const s = z.string();
-      const { minLength, maxLength } = q.validation ?? {};
-      if (typeof minLength === "number") s.min(minLength);
-      if (typeof maxLength === "number") s.max(maxLength);
-
-      return s;
-    }
-
-    case QuestionType.Date: {
-      const s = z
-        .string()
-        .refine(isIsoDateLike, { message: "Invalid date/time format" });
-      const { min, max } = q.validation ?? {};
-      if (min) {
-        s.refine(v => isIsoDateLike(v) && cmpIso(v, min) >= 0, {
-          message: `Date must be on/after ${min}`,
-        });
-      }
-      if (max) {
-        s.refine(v => isIsoDateLike(v) && cmpIso(v, max) <= 0, {
-          message: `Date must be on/before ${max}`,
-        });
-      }
-      
-      return s;
-    }
-
-    default:
-      return z.any();
-  }
-}
-
-export function buildQuizSchema(quiz: Quiz) {
-  const fieldEntries = Object.values(quiz.questions).map(q => {
-    const base = schemaForQuestion(q);
-    if (q.required) {
-      if (q.type === QuestionType.ShortString || q.type === QuestionType.LongString) {
-        (base as z.ZodString).min(1, { message: "Required" });
-      }
-      if (q.type === QuestionType.MultipleChoice) {
-        (base as z.ZodArray<z.ZodTypeAny>).min(
-          Math.max(1, q.validation?.minSelections ?? 1),
-          { message: "Required" }
-        );
-      }
-
-      return [q.id, base] as const;
-    } else {
-      return [q.id, base.optional()] as const;
-    }
-  });
-
-  const shape = Object.fromEntries(fieldEntries) as Record<string, z.ZodTypeAny>;
-  const schema = z.object(shape);
-
-  const conditionalQs = Object.values(quiz.questions).filter(q => q.requiredWhen);
-
-  if (conditionalQs.length > 0) {
-    schema.superRefine((answers, ctx) => {
-      for (const q of conditionalQs) {
-        const cond = q.requiredWhen!;
-        const ok = evalCondition(cond, answers);
-
-        if (ok) {
-          const val = (answers as Answers)[q.id];
-
-          const empty =
-            val === undefined ||
-            val === null ||
-            (typeof val === "string" && val.trim() === "") ||
-            (Array.isArray(val) && val.length === 0);
-
-          if (empty) {
-            ctx.addIssue({
-              code: z.ZodIssueCode.custom,
-              message: "Required due to previous answer",
-              path: [q.id],
-            });
-            continue;
-          }
-
-          const field = schema.shape[q.id];
-          const res = field.safeParse(val);
-          if (!res.success) {
-            for (const issue of res.error.issues) {
+        switch (question.type) {
+          case QuestionType.OneChoice: {
+            if (
+              isRequired &&
+              (typeof value !== 'string' || value.length === 0)
+            ) {
               ctx.addIssue({
-                ...issue,
-                path: [q.id, ...(issue.path ?? [])],
+                code: z.ZodIssueCode.custom,
+                message: `${question.title} is required`,
+                path: [question.id],
               });
             }
+            break;
+          }
+
+          case QuestionType.ShortString:
+          case QuestionType.LongString: {
+            if (
+              isRequired &&
+              (typeof value !== 'string' || value.length === 0)
+            ) {
+              ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                message: `${question.title} is required`,
+                path: [question.id],
+              });
+            } else if (
+              typeof value === 'string' &&
+              value.length > 0 &&
+              'validation' in question
+            ) {
+              if (
+                question.validation?.minLength &&
+                value.length < question.validation.minLength
+              ) {
+                ctx.addIssue({
+                  code: z.ZodIssueCode.too_small,
+                  minimum: question.validation.minLength,
+                  type: 'string',
+                  inclusive: true,
+                  message: `Minimum ${question.validation.minLength} characters required`,
+                  path: [question.id],
+                });
+              }
+              if (
+                question.validation?.maxLength &&
+                value.length > question.validation.maxLength
+              ) {
+                ctx.addIssue({
+                  code: z.ZodIssueCode.too_big,
+                  maximum: question.validation.maxLength,
+                  type: 'string',
+                  inclusive: true,
+                  message: `Maximum ${question.validation.maxLength} characters allowed`,
+                  path: [question.id],
+                });
+              }
+              if (
+                question.type === QuestionType.ShortString &&
+                question.validation?.pattern &&
+                !new RegExp(question.validation.pattern).test(value)
+              ) {
+                ctx.addIssue({
+                  code: z.ZodIssueCode.custom,
+                  message: 'Invalid format',
+                  path: [question.id],
+                });
+              }
+            }
+            break;
+          }
+
+          case QuestionType.MultipleChoice: {
+            if (isRequired && (!Array.isArray(value) || value.length === 0)) {
+              ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                message: `${question.title} is required`,
+                path: [question.id],
+              });
+            } else if (
+              Array.isArray(value) &&
+              value.length > 0 &&
+              'validation' in question
+            ) {
+              if (
+                question.validation?.minSelections &&
+                value.length < question.validation.minSelections
+              ) {
+                ctx.addIssue({
+                  code: z.ZodIssueCode.too_small,
+                  minimum: question.validation.minSelections,
+                  type: 'array',
+                  inclusive: true,
+                  message: `Please select at least ${question.validation.minSelections} options`,
+                  path: [question.id],
+                });
+              }
+              if (
+                question.validation?.maxSelections &&
+                value.length > question.validation.maxSelections
+              ) {
+                ctx.addIssue({
+                  code: z.ZodIssueCode.too_big,
+                  maximum: question.validation.maxSelections,
+                  type: 'array',
+                  inclusive: true,
+                  message: `Please select no more than ${question.validation.maxSelections} options`,
+                  path: [question.id],
+                });
+              }
+            }
+            break;
+          }
+
+          case QuestionType.Boolean: {
+            if (isRequired && typeof value !== 'boolean') {
+              ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                message: `${question.title} is required`,
+                path: [question.id],
+              });
+            }
+            break;
+          }
+
+          case QuestionType.Number: {
+            if (isRequired && (typeof value !== 'number' || isNaN(value))) {
+              ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                message: `${question.title} is required`,
+                path: [question.id],
+              });
+            } else if (
+              typeof value === 'number' &&
+              !isNaN(value) &&
+              'validation' in question
+            ) {
+              if (
+                question.validation?.min !== undefined &&
+                value < question.validation.min
+              ) {
+                ctx.addIssue({
+                  code: z.ZodIssueCode.too_small,
+                  minimum: question.validation.min,
+                  type: 'number',
+                  inclusive: true,
+                  message: `Value must be at least ${question.validation.min}`,
+                  path: [question.id],
+                });
+              }
+              if (
+                question.validation?.max !== undefined &&
+                value > question.validation.max
+              ) {
+                ctx.addIssue({
+                  code: z.ZodIssueCode.too_big,
+                  maximum: question.validation.max,
+                  type: 'number',
+                  inclusive: true,
+                  message: `Value must be at most ${question.validation.max}`,
+                  path: [question.id],
+                });
+              }
+            }
+            break;
+          }
+
+          case QuestionType.Date: {
+            if (
+              isRequired &&
+              (typeof value !== 'string' || value.length === 0)
+            ) {
+              ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                message: `${question.title} is required`,
+                path: [question.id],
+              });
+            } else if (
+              typeof value === 'string' &&
+              value.length > 0 &&
+              'validation' in question
+            ) {
+              const date = new Date(value);
+              if (
+                question.validation?.min &&
+                date < new Date(question.validation.min)
+              ) {
+                ctx.addIssue({
+                  code: z.ZodIssueCode.custom,
+                  message: `Date must be after ${question.validation.min}`,
+                  path: [question.id],
+                });
+              }
+              if (
+                question.validation?.max &&
+                date > new Date(question.validation.max)
+              ) {
+                ctx.addIssue({
+                  code: z.ZodIssueCode.custom,
+                  message: `Date must be before ${question.validation.max}`,
+                  path: [question.id],
+                });
+              }
+            }
+            break;
           }
         }
       }
     });
-  }
-  
-  return schema;
 }

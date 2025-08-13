@@ -42,8 +42,8 @@ export function Providers({
             initialTheme={initialTheme}
             initialColorMode={initialColorMode}
           >
-          {children}
-        </ThemeProvider>
+            {children}
+          </ThemeProvider>
         </AuthProvider>
       </CookiesProvider>
       <ReactQueryDevtools initialIsOpen={false} />

@@ -38,10 +38,10 @@ export function Providers({
     <QueryClientProvider client={queryClient}>
       <CookiesProvider>
         <AuthProvider user={user}>
-            <ThemeProvider
-              initialTheme={initialTheme}
-              initialColorMode={initialColorMode}
-            >
+          <ThemeProvider
+            initialTheme={initialTheme}
+            initialColorMode={initialColorMode}
+          >
             {children}
           </ThemeProvider>
         </AuthProvider>

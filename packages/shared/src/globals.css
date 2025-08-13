@@ -69,4 +69,8 @@
   [role='button']:not(:disabled) {
     cursor: pointer;
   }
+
+  .child-h-full > div {
+    height: 100%;
+  }
 }
