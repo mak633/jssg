@@ -1,7 +1,7 @@
 import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 
 import { dummyUsers } from '@shared/lib/dummy-data';
-import { PaginatedResponse, QueryOptions } from '@shared/types';
+import { PaginatedResponse, QueryOptions } from '@shared/types/base';
 import { User } from '@shared/types/user';
 
 import { environment } from '@/environment';

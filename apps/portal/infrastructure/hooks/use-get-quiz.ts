@@ -8,7 +8,7 @@ import {
 import { AxiosError } from 'axios';
 
 import { initialQuiz } from '@shared/lib/dummy-data';
-import { ErrorResponse } from '@shared/types';
+import { ErrorResponse } from '@shared/types/base';
 import { Quiz, QuizAnswers } from '@shared/types/quiz';
 
 import { environment } from '@/environment';

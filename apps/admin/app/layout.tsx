@@ -21,7 +21,7 @@ import {
   themeSchema,
 } from '@shared/lib/theme-utils';
 import { cn, getUser } from '@shared/lib/utils';
-import { ColorMode } from '@shared/types';
+import { ColorMode } from '@shared/types/base';
 
 import { environment } from '@/environment';
 

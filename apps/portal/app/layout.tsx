@@ -14,7 +14,7 @@ import {
   themeSchema,
 } from '@shared/lib/theme-utils';
 import { cn, getUser } from '@shared/lib/utils';
-import { ColorMode } from '@shared/types';
+import { ColorMode } from '@shared/types/base';
 
 import { HeaderLogo } from '@/components/header-logo';
 import { environment } from '@/environment';

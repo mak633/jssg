@@ -14,7 +14,7 @@ import {
   themeSchema,
 } from '@shared/lib/theme-utils';
 import { cn } from '@shared/lib/utils';
-import { ColorMode } from '@shared/types';
+import { ColorMode } from '@shared/types/base';
 
 import { TermsOfUse } from '@/components/term-of-use';
 import { environment } from '@/environment';
