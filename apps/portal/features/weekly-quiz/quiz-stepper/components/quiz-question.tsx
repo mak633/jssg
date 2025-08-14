@@ -1,4 +1,6 @@
+import { TFunction } from 'i18next';
 import { useFormContext } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import {
   BooleanForm,
@@ -13,31 +15,33 @@ import { Question, QuestionType } from '@shared/types/quiz';
 
 import { hideQuestion } from '@/utils/filter-quiz';
 
-const renderQuestion = (question: Question) => {
+const renderQuestion = (question: Question, t: TFunction<"translation", string>, tPrefix: string) => {
   switch (question.type) {
     case QuestionType.ShortString:
-      return <ShortStringForm {...question} />;
+      return <ShortStringForm {...question} t={t} tPrefix={tPrefix} />;
     case QuestionType.LongString:
-      return <LongStringForm {...question} />;
+      return <LongStringForm {...question} t={t} tPrefix={tPrefix} />;
     case QuestionType.Number:
-      return <NumberForm {...question} />;
+      return <NumberForm {...question} t={t} tPrefix={tPrefix} />;
     case QuestionType.Date:
-      return <DateForm {...question} />;
+      return <DateForm {...question} t={t} tPrefix={tPrefix} />;
     case QuestionType.Boolean:
-      return <BooleanForm {...question} positive="Yes" negative="No" />;
+      return <BooleanForm {...question} t={t} tPrefix={tPrefix} />;
     case QuestionType.OneChoice:
-      return <OneChoiceForm {...question} />;
+      return <OneChoiceForm {...question} t={t} tPrefix={tPrefix}/>;
     case QuestionType.MultipleChoice:
-      return <MultipleChoiceForm {...question} />;
+      return <MultipleChoiceForm {...question} t={t} tPrefix={tPrefix} />;
     default:
       return null;
   }
 };
 
-type QuizQuestionPros = {
+type QuizQuestionProps = {
+  quizId: string;
   question: Question;
 };
-export const QuizQuestion = ({ question }: QuizQuestionPros) => {
+export const QuizQuestion = ({ quizId, question }: QuizQuestionProps) => {
+  const { t } = useTranslation();
   const { watch } = useFormContext();
   const dependsOn = question.requiredWhen && watch(question.requiredWhen.qId);
   const hidden =
@@ -47,5 +51,5 @@ export const QuizQuestion = ({ question }: QuizQuestionPros) => {
     return null;
   }
 
-  return renderQuestion(question);
+  return renderQuestion(question, t, quizId);
 };

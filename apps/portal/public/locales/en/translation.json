@@ -2,16 +2,87 @@
   "app": {
     "Weekly Quiz": "Weekly Quiz"
   },
+  "common": {
+    "required": "This field is required.",
+    "min_length": "This field must be at least {{min}} characters.",
+    "max_length": "This field must be at most {{max}} characters.",
+    "email": "Please enter a valid email address.",
+    "url": "Please enter a valid URL.",
+    "yes": "Yes",
+    "no": "No",
+    "submit": "Submit",
+    "continue": "Continue",
+    "back": "Back",
+    "edit": "Edit",
+    "loading": "Loading...",
+    "notFound": "Not Found"
+  },
   "quiz": {
-    "title": "Weekly Quiz",
-    "description": "Test your knowledge with our weekly quiz!",
-    "question": "What is the capital of France?",
-    "options": {
-      "a": "Berlin",
-      "b": "Madrid",
-      "c": "Paris",
-      "d": "Rome"
-    },
-    "submit": "Submit"
+    "summary": "Summary",
+    "congratulations": "Congratulations!",
+    "quiz_completed": "You have completed the quiz.",
+    "review_info": "Please review information before submitting."
+  },
+  "tech-conf-2025": {
+    "quiz_title": "Tech Conference 2025 Registration",
+
+    "s1_title": "Profile",
+    "s1_desc": "Tell us about yourself.",
+
+    "s2_title": "Preferences",
+    "s2_desc": "Help us tailor your event experience.",
+
+    "s3_title": "Logistics",
+    "s3_desc": "Arrival and on-site needs.",
+
+    "q1_title": "What type of attendee are you?",
+    "q1_desc": "Choose the option that best describes you.",
+    "q1_opt_professional": "Professional",
+    "q1_opt_student": "Student",
+    "q1_opt_speaker": "Speaker",
+
+    "q2_title": "Talk title",
+    "q2_desc": "Provide the working title of your session.",
+
+    "q3_title": "Years of professional experience",
+
+    "q4_title": "Select at least two topics you’re interested in",
+    "q4_desc": "Choose all that apply (minimum 2).",
+    "q4_opt_ai": "AI & ML",
+    "q4_opt_web": "Web Engineering",
+    "q4_opt_security": "Security",
+    "q4_opt_data": "Data Engineering",
+    "q4_opt_ux": "UX & Product",
+
+    "q5_title": "Do you need a certificate of attendance?",
+
+    "q6_title": "Full name for the certificate",
+
+    "q7_title": "Would you like to attend pre-conference workshops?",
+
+    "q8_title": "Select at least two workshops",
+    "q8_desc": "Workshops have limited seats.",
+    "q8_opt_docker": "Docker Deep Dive",
+    "q8_opt_data_design": "Designing with Data",
+    "q8_opt_ts_advanced": "Advanced TypeScript",
+    "q8_opt_ethical_ai": "Ethical AI in Practice",
+
+    "q9_title": "Arrival date",
+
+    "q10_title": "Dietary preference",
+    "q10_opt_none": "None",
+    "q10_opt_vegetarian": "Vegetarian",
+    "q10_opt_vegan": "Vegan",
+    "q10_opt_halal": "Halal",
+    "q10_opt_kosher": "Kosher",
+    "q10_opt_gluten_free": "Gluten-free",
+
+    "q11_title": "T-shirt size",
+    "q11_opt_xs": "XS",
+    "q11_opt_s": "S",
+    "q11_opt_m": "M",
+    "q11_opt_l": "L",
+    "q11_opt_xl": "XL",
+    "q11_opt_xxl": "XXL"
   }
 }

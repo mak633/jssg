@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { useFormContext } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import { SquarePen } from '@shared/components/icons';
 import { Button } from '@shared/components/primitives/button';
@@ -14,6 +15,7 @@ import { Quiz } from '@shared/types/quiz';
 
 import { answerModifier } from '@/utils/answer-modifier';
 import { filterQuestionsBasedOnAnswer } from '@/utils/filter-quiz';
+import { TranslationKeys } from '@/utils/translation-keys';
 
 type QuizSummarySectionProps = {
   quiz: Quiz;
@@ -25,6 +27,7 @@ export const QuizSummarySection = ({
   sectionId,
   id,
 }: QuizSummarySectionProps) => {
+  const { t } = useTranslation();
   const { getValues } = useFormContext();
   const { setStep } = useStepper();
 
@@ -37,10 +40,10 @@ export const QuizSummarySection = ({
   }, [getValues, quiz.questions, quiz.sections, sectionId]);
 
   return (
-    <div>
+    <div >
       <div className="mb-3 flex flex-row items-center">
         <h3 className="mr-6 text-lg font-medium">
-          {quiz.sections[sectionId].title}
+          {t(`${quiz.id}.${quiz.sections[sectionId].title}`)}
         </h3>
         <Button
           onClick={() => {
@@ -50,7 +53,7 @@ export const QuizSummarySection = ({
           className="h-auto p-2"
         >
           <SquarePen className="mr-2 size-4" />
-          Edit
+          {t(TranslationKeys.common.edit)}
         </Button>
       </div>
       <Table className="mb-8 max-w-xl table-fixed border-t-4">
@@ -58,12 +61,14 @@ export const QuizSummarySection = ({
           {filteredQuestions.map((questionId) => (
             <TableRow key={questionId}>
               <TableCell className="w-50 border">
-                {quiz.questions[questionId].title}
+                {t(`${quiz.id}.${quiz.questions[questionId].title}`)}
               </TableCell>
               <TableCell className="w-50 border">
                 {answerModifier(
                   getValues(questionId),
-                  quiz.questions[questionId]
+                  quiz.questions[questionId],
+                  quiz.id,
+                  t
                 )}
               </TableCell>
             </TableRow>

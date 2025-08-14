@@ -30,7 +30,7 @@ export const dummyUsers: User[] = [
 
 export const initialQuiz: Quiz = {
   id: 'tech-conf-2025',
-  title: 'Tech Conference 2025 Registration',
+  title: 'quiz_title',
   startQId: 'q1_attendee_type',
   status: QuizStatus.Published,
   version: '1.0.0',
@@ -38,15 +38,15 @@ export const initialQuiz: Quiz = {
   sections: {
     s1_profile: {
       id: 's1_profile',
-      title: 'Profile',
-      description: 'Tell us about yourself.',
+      title: 's1_title',
+      description: 's1_desc',
       qIds: ['q1_attendee_type', 'q2_speaker_title', 'q3_experience_years'],
       nextSectionId: 's2_preferences',
     },
     s2_preferences: {
       id: 's2_preferences',
-      title: 'Preferences',
-      description: 'Help us tailor your event experience.',
+      title: 's2_title',
+      description: 's2_desc',
       qIds: [
         'q4_topics_of_interest',
         'q5_need_certificate',
@@ -58,13 +58,12 @@ export const initialQuiz: Quiz = {
     },
     s3_logistics: {
       id: 's3_logistics',
-      title: 'Logistics',
-      description: 'Arrival and on-site needs.',
+      title: 's3_title',
+      description: 's3_desc',
       qIds: [
         'q9_arrival_date',
-        'q10_checkin_time',
-        'q11_dietary_preference',
-        'q12_tshirt_size',
+        'q10_dietary_preference',
+        'q11_tshirt_size',
       ],
       nextSectionId: 'END',
     },
@@ -73,14 +72,14 @@ export const initialQuiz: Quiz = {
   questions: {
     q1_attendee_type: {
       id: 'q1_attendee_type',
-      title: 'What type of attendee are you?',
-      description: 'Choose the option that best describes you.',
+      title: 'q1_title',
+      description: 'q1_desc',
       type: QuestionType.OneChoice,
       required: true,
       options: [
-        { value: 'professional', label: 'Professional' },
-        { value: 'student', label: 'Student' },
-        { value: 'speaker', label: 'Speaker' },
+        { value: 'professional', label: 'q1_opt_professional' },
+        { value: 'student', label: 'q1_opt_student' },
+        { value: 'speaker', label: 'q1_opt_speaker' },
       ],
       routing: [
         {
@@ -93,8 +92,8 @@ export const initialQuiz: Quiz = {
 
     q2_speaker_title: {
       id: 'q2_speaker_title',
-      title: 'Talk title',
-      description: 'Provide the working title of your session.',
+      title: 'q2_title',
+      description: 'q2_desc',
       type: QuestionType.ShortString,
       requiredWhen: { op: 'eq', qId: 'q1_attendee_type', value: 'speaker' },
       validation: { minLength: 5, maxLength: 120 },
@@ -103,7 +102,7 @@ export const initialQuiz: Quiz = {
 
     q3_experience_years: {
       id: 'q3_experience_years',
-      title: 'Years of professional experience',
+      title: 'q3_title',
       type: QuestionType.Number,
       required: true,
       validation: { min: 0, max: 50, step: 1 },
@@ -112,16 +111,16 @@ export const initialQuiz: Quiz = {
 
     q4_topics_of_interest: {
       id: 'q4_topics_of_interest',
-      title: 'Select at least two topics you’re interested in',
-      description: 'Choose all that apply (minimum 2).',
+      title: 'q4_title',
+      description: 'q4_desc',
       type: QuestionType.MultipleChoice,
       required: true,
       options: [
-        { value: 'ai', label: 'AI & ML' },
-        { value: 'web', label: 'Web Engineering' },
-        { value: 'security', label: 'Security' },
-        { value: 'data', label: 'Data Engineering' },
-        { value: 'ux', label: 'UX & Product' },
+        { value: 'ai', label: 'q4_opt_ai' },
+        { value: 'web', label: 'q4_opt_web' },
+        { value: 'security', label: 'q4_opt_security' },
+        { value: 'data', label: 'q4_opt_data' },
+        { value: 'ux', label: 'q4_opt_ux' },
       ],
       validation: { minSelections: 2 },
       nextQuestionId: 'q5_need_certificate',
@@ -129,7 +128,7 @@ export const initialQuiz: Quiz = {
 
     q5_need_certificate: {
       id: 'q5_need_certificate',
-      title: 'Do you need a certificate of attendance?',
+      title: 'q5_title',
       type: QuestionType.Boolean,
       routing: [
         {
@@ -146,16 +145,16 @@ export const initialQuiz: Quiz = {
 
     q6_certificate_name: {
       id: 'q6_certificate_name',
-      title: 'Full name for the certificate',
+      title: 'q6_title',
       type: QuestionType.ShortString,
       requiredWhen: { op: 'isTruthy', qId: 'q5_need_certificate' },
-      validation: { minLength: 3, maxLength: 80, pattern: "^[\\p{L} .'-]+$" },
+      validation: { minLength: 3, maxLength: 80 },
       nextQuestionId: 'q7_workshops_opt_in',
     },
 
     q7_workshops_opt_in: {
       id: 'q7_workshops_opt_in',
-      title: 'Would you like to attend pre-conference workshops?',
+      title: 'q7_title',
       type: QuestionType.Boolean,
       required: true,
       routing: [
@@ -173,15 +172,15 @@ export const initialQuiz: Quiz = {
 
     q8_workshop_selection: {
       id: 'q8_workshop_selection',
-      title: 'Select at least two workshops',
-      description: 'Workshops have limited seats.',
+      title: 'q8_title',
+      description: 'q8_desc',
       type: QuestionType.MultipleChoice,
       requiredWhen: { op: 'isTruthy', qId: 'q7_workshops_opt_in' },
       options: [
-        { value: 'docker', label: 'Docker Deep Dive' },
-        { value: 'data_design', label: 'Designing with Data' },
-        { value: 'ts_advanced', label: 'Advanced TypeScript' },
-        { value: 'ethical_ai', label: 'Ethical AI in Practice' },
+        { value: 'docker', label: 'q8_opt_docker' },
+        { value: 'data_design', label: 'q8_opt_data_design' },
+        { value: 'ts_advanced', label: 'q8_opt_ts_advanced' },
+        { value: 'ethical_ai', label: 'q8_opt_ethical_ai' },
       ],
       validation: { minSelections: 2, maxSelections: 3 },
       nextQuestionId: 'q9_arrival_date',
@@ -189,48 +188,40 @@ export const initialQuiz: Quiz = {
 
     q9_arrival_date: {
       id: 'q9_arrival_date',
-      title: 'Arrival date',
+      title: 'q9_title',
       type: QuestionType.Date,
       required: true,
       validation: { min: '2025-09-10', max: '2025-10-05' },
-      nextQuestionId: 'q10_checkin_time',
+      nextQuestionId: 'q10_dietary_preference',
     },
 
-    q10_checkin_time: {
-      id: 'q10_checkin_time',
-      title: 'Estimated hotel check-in time',
-      type: QuestionType.Date,
-      validation: { min: '2025-09-10T08:00:00Z', max: '2025-10-05T22:00:00Z' },
-      nextQuestionId: 'q11_dietary_preference',
-    },
-
-    q11_dietary_preference: {
-      id: 'q11_dietary_preference',
-      title: 'Dietary preference',
+    q10_dietary_preference: {
+      id: 'q10_dietary_preference',
+      title: 'q10_title',
       type: QuestionType.OneChoice,
       options: [
-        { value: 'none', label: 'None' },
-        { value: 'vegetarian', label: 'Vegetarian' },
-        { value: 'vegan', label: 'Vegan' },
-        { value: 'halal', label: 'Halal' },
-        { value: 'kosher', label: 'Kosher' },
-        { value: 'gluten_free', label: 'Gluten-free' },
+        { value: 'none', label: 'q10_opt_none' },
+        { value: 'vegetarian', label: 'q10_opt_vegetarian' },
+        { value: 'vegan', label: 'q10_opt_vegan' },
+        { value: 'halal', label: 'q10_opt_halal' },
+        { value: 'kosher', label: 'q10_opt_kosher' },
+        { value: 'gluten_free', label: 'q10_opt_gluten_free' },
       ],
-      nextQuestionId: 'q12_tshirt_size',
+      nextQuestionId: 'q11_tshirt_size',
     },
 
-    q12_tshirt_size: {
-      id: 'q12_tshirt_size',
-      title: 'T-shirt size',
+    q11_tshirt_size: {
+      id: 'q11_tshirt_size',
+      title: 'q11_title',
       type: QuestionType.OneChoice,
       required: true,
       options: [
-        { value: 'xs', label: 'XS' },
-        { value: 's', label: 'S' },
-        { value: 'm', label: 'M' },
-        { value: 'l', label: 'L' },
-        { value: 'xl', label: 'XL' },
-        { value: 'xxl', label: 'XXL' },
+        { value: 'xs', label: 'q11_opt_xs' },
+        { value: 's', label: 'q11_opt_s' },
+        { value: 'm', label: 'q11_opt_m' },
+        { value: 'l', label: 'q11_opt_l' },
+        { value: 'xl', label: 'q11_opt_xl' },
+        { value: 'xxl', label: 'q11_opt_xxl' },
       ],
       nextQuestionId: 'END',
     },

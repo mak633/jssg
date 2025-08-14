@@ -73,8 +73,8 @@ export default async function RootLayout({
           </div>
           <HeaderLogo />
           <main className="flex h-screen w-full flex-col items-center justify-center px-4 pb-4 pt-16">
-            <div className="rounded-4xl max-h-200 size-full max-w-4xl overflow-hidden bg-white">
-              <ScrollArea className="size-full p-8">{children}</ScrollArea>
+            <div className="rounded-4xl max-h-220 size-full max-w-4xl overflow-hidden bg-background">
+              <ScrollArea className="size-full p-4 lg:p-8">{children}</ScrollArea>
             </div>
           </main>
         </Providers>

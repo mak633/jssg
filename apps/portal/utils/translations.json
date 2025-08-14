@@ -1,26 +1,74 @@
 {
   "app": {
-    "terms_of_use": "app.terms_of_use"
-  },
-  "login": {
-    "title": "login.title",
-    "subtitle": "login.subtitle",
-    "register": "login.register"
-  },
-  "registration": {
-    "title": "registration.title",
-    "subtitle": "registration.subtitle",
-    "sign_up": "registration.sign_up",
-    "first_name": "registration.first_name",
-    "last_name": "registration.last_name"
+    "weekly_quiz": "app.weekly_quiz"
   },
   "common": {
-    "loading": "common.loading",
-    "error": "common.error",
-    "or": "common.or",
+    "required": "common.required",
+    "min_length": "common.min_length",
+    "max_length": "common.max_length",
     "email": "common.email",
-    "password": "common.password",
-    "sign_up": "common.sign_up",
-    "sign_in": "common.sign_in"
+    "url": "common.url",
+    "yes": "common.yes",
+    "no": "common.no",
+    "submit": "common.submit",
+    "continue": "common.continue",
+    "back": "common.back",
+    "edit": "common.edit",
+    "loading": "common.loading",
+    "notFound": "common.notFound"
+  },
+  "quiz": {
+    "summary": "quiz.summary",
+    "congratulations": "quiz.congratulations",
+    "quiz_completed": "quiz.quiz_completed",
+    "review_info": "quiz.review_info"
+  },
+  "tech-conf-2025": {
+    "quiz_title": "tech-conf-2025.quiz_title",
+    "s1_title": "tech-conf-2025.s1_title",
+    "s1_desc": "tech-conf-2025.s1_desc",
+    "s2_title": "tech-conf-2025.s2_title",
+    "s2_desc": "tech-conf-2025.s2_desc",
+    "s3_title": "tech-conf-2025.s3_title",
+    "s3_desc": "tech-conf-2025.s3_desc",
+    "q1_title": "tech-conf-2025.q1_title",
+    "q1_desc": "tech-conf-2025.q1_desc",
+    "q1_opt_professional": "tech-conf-2025.q1_opt_professional",
+    "q1_opt_student": "tech-conf-2025.q1_opt_student",
+    "q1_opt_speaker": "tech-conf-2025.q1_opt_speaker",
+    "q2_title": "tech-conf-2025.q2_title",
+    "q2_desc": "tech-conf-2025.q2_desc",
+    "q3_title": "tech-conf-2025.q3_title",
+    "q4_title": "tech-conf-2025.q4_title",
+    "q4_desc": "tech-conf-2025.q4_desc",
+    "q4_opt_ai": "tech-conf-2025.q4_opt_ai",
+    "q4_opt_web": "tech-conf-2025.q4_opt_web",
+    "q4_opt_security": "tech-conf-2025.q4_opt_security",
+    "q4_opt_data": "tech-conf-2025.q4_opt_data",
+    "q4_opt_ux": "tech-conf-2025.q4_opt_ux",
+    "q5_title": "tech-conf-2025.q5_title",
+    "q6_title": "tech-conf-2025.q6_title",
+    "q7_title": "tech-conf-2025.q7_title",
+    "q8_title": "tech-conf-2025.q8_title",
+    "q8_desc": "tech-conf-2025.q8_desc",
+    "q8_opt_docker": "tech-conf-2025.q8_opt_docker",
+    "q8_opt_data_design": "tech-conf-2025.q8_opt_data_design",
+    "q8_opt_ts_advanced": "tech-conf-2025.q8_opt_ts_advanced",
+    "q8_opt_ethical_ai": "tech-conf-2025.q8_opt_ethical_ai",
+    "q9_title": "tech-conf-2025.q9_title",
+    "q10_title": "tech-conf-2025.q10_title",
+    "q10_opt_none": "tech-conf-2025.q10_opt_none",
+    "q10_opt_vegetarian": "tech-conf-2025.q10_opt_vegetarian",
+    "q10_opt_vegan": "tech-conf-2025.q10_opt_vegan",
+    "q10_opt_halal": "tech-conf-2025.q10_opt_halal",
+    "q10_opt_kosher": "tech-conf-2025.q10_opt_kosher",
+    "q10_opt_gluten_free": "tech-conf-2025.q10_opt_gluten_free",
+    "q11_title": "tech-conf-2025.q11_title",
+    "q11_opt_xs": "tech-conf-2025.q11_opt_xs",
+    "q11_opt_s": "tech-conf-2025.q11_opt_s",
+    "q11_opt_m": "tech-conf-2025.q11_opt_m",
+    "q11_opt_l": "tech-conf-2025.q11_opt_l",
+    "q11_opt_xl": "tech-conf-2025.q11_opt_xl",
+    "q11_opt_xxl": "tech-conf-2025.q11_opt_xxl"
   }
 }

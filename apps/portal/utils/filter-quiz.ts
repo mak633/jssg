@@ -1,4 +1,4 @@
-import { Condition, Question } from '@shared/types/quiz';
+import { Condition, Question, QuizAnswers } from '@shared/types/quiz';
 
 export const hideQuestion = (condition: Condition, value?: unknown) => {
   switch (condition.op) {
@@ -17,8 +17,8 @@ export const hideQuestion = (condition: Condition, value?: unknown) => {
 export const filterQuestionsBasedOnAnswer = (
   qList: string[],
   allQuestions: Record<string, Question>,
-  answers: Record<string, unknown>
-) => {
+  answers: QuizAnswers
+): string[] => {
   return qList.filter((qId) => {
     const requiredWhen = allQuestions[qId].requiredWhen;
     if (!requiredWhen) return true;
@@ -30,10 +30,10 @@ export const filterQuestionsBasedOnAnswer = (
 };
 
 export const filterAnswersBasedOnQuestion = (
-  answers: Record<string, unknown>,
+  answers: QuizAnswers,
   allQuestions: Record<string, Question>
-) => {
-  const filteredAnswers: Record<string, unknown> = {};
+): QuizAnswers => {
+  const filteredAnswers: QuizAnswers = {};
 
   for (const [key, value] of Object.entries(answers)) {
     const requiredWhen = allQuestions[key].requiredWhen;

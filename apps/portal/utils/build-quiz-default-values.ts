@@ -1,7 +1,7 @@
-import { QuestionType, Quiz } from '@shared/types/quiz';
+import { Answer, QuestionType, Quiz } from '@shared/types/quiz';
 
-export function buildDefaultValues(quiz: Quiz): Record<string, unknown> {
-  const acc: Record<string, unknown> = {};
+export function buildDefaultValues(quiz: Quiz): Record<string, Answer> {
+  const acc: Record<string, Answer> = {};
 
   for (const q of Object.values(quiz.questions)) {
     switch (q.type) {
@@ -21,7 +21,7 @@ export function buildDefaultValues(quiz: Quiz): Record<string, unknown> {
       }
 
       case QuestionType.Number: {
-        acc[q.id] = 0;
+        acc[q.id] = '';
         break;
       }
 

@@ -14,7 +14,7 @@ export enum QuestionType {
   Date,
 }
 
-export type Answer = string | number | boolean;
+export type Answer = string | number | boolean | null | string[];
 
 export type Condition =
   | { op: 'isTruthy' | 'isFalsy'; qId: string }
@@ -120,3 +120,5 @@ export interface Quiz {
   questions: Record<string, Question>;
   version?: string;
 }
+
+export type QuizAnswers = Record<string, Answer>

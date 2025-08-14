@@ -1,10 +1,10 @@
 import { z } from 'zod';
 
-import { Quiz, QuestionType, Condition } from '@shared/types/quiz';
+import { Quiz, QuestionType, Condition, Answer } from '@shared/types/quiz';
 
 function evaluateCondition(
   condition: Condition,
-  data: Record<string, unknown>
+  data: Record<string, Answer>
 ): boolean {
   const value = data[condition.qId];
 
@@ -24,7 +24,7 @@ function evaluateCondition(
 
 export function buildQuizSchema(
   quiz: Quiz
-): z.ZodType<Record<string, unknown>> {
+): z.ZodType<Record<string, Answer>> {
   return z
     .object({})
     .catchall(z.any())
@@ -46,7 +46,7 @@ export function buildQuizSchema(
             ) {
               ctx.addIssue({
                 code: z.ZodIssueCode.custom,
-                message: `${question.title} is required`,
+                message: `This field is required`,
                 path: [question.id],
               });
             }
@@ -61,7 +61,7 @@ export function buildQuizSchema(
             ) {
               ctx.addIssue({
                 code: z.ZodIssueCode.custom,
-                message: `${question.title} is required`,
+                message: `This field is required`,
                 path: [question.id],
               });
             } else if (
@@ -114,7 +114,7 @@ export function buildQuizSchema(
             if (isRequired && (!Array.isArray(value) || value.length === 0)) {
               ctx.addIssue({
                 code: z.ZodIssueCode.custom,
-                message: `${question.title} is required`,
+                message: `This field is required`,
                 path: [question.id],
               });
             } else if (
@@ -156,7 +156,7 @@ export function buildQuizSchema(
             if (isRequired && typeof value !== 'boolean') {
               ctx.addIssue({
                 code: z.ZodIssueCode.custom,
-                message: `${question.title} is required`,
+                message: `This field is required`,
                 path: [question.id],
               });
             }
@@ -167,7 +167,7 @@ export function buildQuizSchema(
             if (isRequired && (typeof value !== 'number' || isNaN(value))) {
               ctx.addIssue({
                 code: z.ZodIssueCode.custom,
-                message: `${question.title} is required`,
+                message: `This field is required`,
                 path: [question.id],
               });
             } else if (
@@ -212,7 +212,7 @@ export function buildQuizSchema(
             ) {
               ctx.addIssue({
                 code: z.ZodIssueCode.custom,
-                message: `${question.title} is required`,
+                message: `This field is required`,
                 path: [question.id],
               });
             } else if (
