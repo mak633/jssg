@@ -10,7 +10,7 @@ export function Admin() {
   const { t } = useTranslation();
 
   return (
-    <div className="container mx-auto flex w-full flex-col items-center justify-center space-y-6 md:w-1/2 xl:w-1/3 2xl:w-1/4">
+    <div className="container mx-auto flex w-full flex-col items-center justify-center space-y-6">
       <div className="flex flex-col space-y-2 text-center">
         <h1 className="text-2xl font-semibold tracking-tight">
           {t(TranslationKeys.login.title)}

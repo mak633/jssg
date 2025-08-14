@@ -1,7 +1,7 @@
+import { TFunction } from 'i18next';
 import { CalendarIcon } from 'lucide-react';
 import { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { TFunction } from 'i18next';
 
 import { cn, formatDate } from '@shared/lib/utils';
 
@@ -27,7 +27,7 @@ type BooleanFormProps = {
   id: string;
   title: string;
   description?: string;
-  t: TFunction<"translation", string>;
+  t: TFunction<'translation', string>;
   tPrefix?: string;
 };
 export const BooleanForm = ({
@@ -35,7 +35,7 @@ export const BooleanForm = ({
   title,
   description,
   t,
-  tPrefix
+  tPrefix,
 }: BooleanFormProps) => {
   const form = useFormContext();
 
@@ -46,7 +46,9 @@ export const BooleanForm = ({
       render={({ field }) => (
         <FormItem className="flex flex-col gap-4">
           <FormLabel>{t(`${tPrefix}.${title}`)}</FormLabel>
-          {description && <FormDescription>{t(`${tPrefix}.${description}`)}</FormDescription>}
+          {description && (
+            <FormDescription>{t(`${tPrefix}.${description}`)}</FormDescription>
+          )}
           <FormControl>
             <RadioGroup
               value={field.value === null ? null : field.value ? '1' : '0'}
@@ -73,7 +75,7 @@ type ShortStringFormProps = {
   id: string;
   title: string;
   description?: string;
-  t: TFunction<"translation", string>;
+  t: TFunction<'translation', string>;
   tPrefix?: string;
 };
 export const ShortStringForm = ({
@@ -81,7 +83,7 @@ export const ShortStringForm = ({
   title,
   description,
   t,
-  tPrefix
+  tPrefix,
 }: ShortStringFormProps) => {
   const form = useFormContext();
 
@@ -92,7 +94,9 @@ export const ShortStringForm = ({
       render={({ field }) => (
         <FormItem className="flex flex-col">
           <FormLabel>{t(`${tPrefix}.${title}`)}</FormLabel>
-          {description && <FormDescription>{t(`${tPrefix}.${description}`)}</FormDescription>}
+          {description && (
+            <FormDescription>{t(`${tPrefix}.${description}`)}</FormDescription>
+          )}
           <FormControl>
             <Input {...field} />
           </FormControl>
@@ -107,7 +111,7 @@ type LongStringFormProps = {
   id: string;
   title: string;
   description?: string;
-  t: TFunction<"translation", string>;
+  t: TFunction<'translation', string>;
   tPrefix?: string;
 };
 export const LongStringForm = ({
@@ -115,7 +119,7 @@ export const LongStringForm = ({
   title,
   description,
   t,
-  tPrefix
+  tPrefix,
 }: LongStringFormProps) => {
   const form = useFormContext();
 
@@ -126,7 +130,9 @@ export const LongStringForm = ({
       render={({ field }) => (
         <FormItem className="flex flex-col">
           <FormLabel>{t(`${tPrefix}.${title}`)}</FormLabel>
-          {description && <FormDescription>{t(`${tPrefix}.${description}`)}</FormDescription>}
+          {description && (
+            <FormDescription>{t(`${tPrefix}.${description}`)}</FormDescription>
+          )}
           <FormControl>
             <Textarea {...field} />
           </FormControl>
@@ -141,10 +147,16 @@ type NumberFormProps = {
   id: string;
   title: string;
   description?: string;
-  t: TFunction<"translation", string>;
+  t: TFunction<'translation', string>;
   tPrefix?: string;
 };
-export const NumberForm = ({ id, title, description, t, tPrefix }: NumberFormProps) => {
+export const NumberForm = ({
+  id,
+  title,
+  description,
+  t,
+  tPrefix,
+}: NumberFormProps) => {
   const form = useFormContext();
 
   return (
@@ -154,7 +166,9 @@ export const NumberForm = ({ id, title, description, t, tPrefix }: NumberFormPro
       render={({ field }) => (
         <FormItem className="flex flex-col">
           <FormLabel>{t(`${tPrefix}.${title}`)}</FormLabel>
-          {description && <FormDescription>{t(`${tPrefix}.${description}`)}</FormDescription>}
+          {description && (
+            <FormDescription>{t(`${tPrefix}.${description}`)}</FormDescription>
+          )}
           <FormControl>
             <NumberInput {...field} />
           </FormControl>
@@ -170,7 +184,7 @@ type DateFormProps = {
   title: string;
   description?: string;
   placeholder?: string;
-  t: TFunction<"translation", string>;
+  t: TFunction<'translation', string>;
   tPrefix?: string;
 };
 export const DateForm = ({
@@ -179,7 +193,7 @@ export const DateForm = ({
   description,
   placeholder,
   t,
-  tPrefix
+  tPrefix,
 }: DateFormProps) => {
   const form = useFormContext();
   const [calendarOpen, setCalendarOpen] = useState<boolean>(false);
@@ -191,7 +205,9 @@ export const DateForm = ({
       render={({ field }) => (
         <FormItem className="flex flex-col">
           <FormLabel>{t(`${tPrefix}.${title}`)}</FormLabel>
-          {description && <FormDescription>{t(`${tPrefix}.${description}`)}</FormDescription>}
+          {description && (
+            <FormDescription>{t(`${tPrefix}.${description}`)}</FormDescription>
+          )}
           <Popover open={calendarOpen} onOpenChange={setCalendarOpen}>
             <PopoverTrigger asChild>
               <FormControl>
@@ -205,7 +221,9 @@ export const DateForm = ({
                   {field.value ? (
                     formatDate(new Date(field.value))
                   ) : (
-                    <span>{placeholder ? t(`${tPrefix}.${placeholder}`) : ''}</span>
+                    <span>
+                      {placeholder ? t(`${tPrefix}.${placeholder}`) : ''}
+                    </span>
                   )}
                   <CalendarIcon className="ml-auto size-4 opacity-50" />
                 </Button>
@@ -234,7 +252,7 @@ type OneChoiceFormProps = {
   title: string;
   description?: string;
   options: { value: string; label: string }[];
-  t: TFunction<"translation", string>;
+  t: TFunction<'translation', string>;
   tPrefix?: string;
 };
 export const OneChoiceForm = ({
@@ -243,7 +261,7 @@ export const OneChoiceForm = ({
   description,
   options,
   t,
-  tPrefix
+  tPrefix,
 }: OneChoiceFormProps) => {
   const form = useFormContext();
 
@@ -254,7 +272,9 @@ export const OneChoiceForm = ({
       render={({ field }) => (
         <FormItem className="flex flex-col">
           <FormLabel>{t(`${tPrefix}.${title}`)}</FormLabel>
-          {description && <FormDescription>{t(`${tPrefix}.${description}`)}</FormDescription>}
+          {description && (
+            <FormDescription>{t(`${tPrefix}.${description}`)}</FormDescription>
+          )}
           <FormControl>
             <RadioGroup
               value={field.value}
@@ -286,7 +306,7 @@ type MultipleChoiceFormProps = {
   title: string;
   description?: string;
   options: { value: string; label: string }[];
-  t: TFunction<"translation", string>;
+  t: TFunction<'translation', string>;
   tPrefix?: string;
 };
 export const MultipleChoiceForm = ({
@@ -295,7 +315,7 @@ export const MultipleChoiceForm = ({
   description,
   options,
   t,
-  tPrefix
+  tPrefix,
 }: MultipleChoiceFormProps) => {
   const form = useFormContext();
 
@@ -306,8 +326,14 @@ export const MultipleChoiceForm = ({
       render={() => (
         <FormItem>
           <div>
-            <FormLabel className="text-base">{t(`${tPrefix}.${title}`)}</FormLabel>
-            {description && <FormDescription>{t(`${tPrefix}.${description}`)}</FormDescription>}
+            <FormLabel className="text-base">
+              {t(`${tPrefix}.${title}`)}
+            </FormLabel>
+            {description && (
+              <FormDescription>
+                {t(`${tPrefix}.${description}`)}
+              </FormDescription>
+            )}
           </div>
           {options.map((item) => (
             <FormField

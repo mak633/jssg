@@ -60,11 +60,7 @@ export const initialQuiz: Quiz = {
       id: 's3_logistics',
       title: 's3_title',
       description: 's3_desc',
-      qIds: [
-        'q9_arrival_date',
-        'q10_dietary_preference',
-        'q11_tshirt_size',
-      ],
+      qIds: ['q9_arrival_date', 'q10_dietary_preference', 'q11_tshirt_size'],
       nextSectionId: 'END',
     },
   },

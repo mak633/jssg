@@ -3,10 +3,13 @@ import { Inter as FontSans } from 'next/font/google';
 import { cookies } from 'next/headers';
 import { PropsWithChildren, Suspense } from 'react';
 
-import { LayoutGrid, Users } from '@shared/components/icons';
+import {
+  FileQuestionIcon,
+  LayoutGridIcon,
+  UsersIcon,
+} from '@shared/components/icons';
 import { TopLoader } from '@shared/components/primitives/next-top-loader';
 import { SidebarInset } from '@shared/components/primitives/sidebar';
-import { Toaster } from '@shared/components/primitives/sonner';
 import { Content } from '@shared/components/ui/layout/content';
 import { Header } from '@shared/components/ui/layout/header';
 import { Layout } from '@shared/components/ui/layout/layout';
@@ -41,7 +44,7 @@ const sections: NavSection[] = [
     items: [
       {
         title: 'Dashboard',
-        icon: <LayoutGrid />,
+        icon: <LayoutGridIcon />,
         url: '/dashboard',
         'data-testid': 'menu-item-dashboard',
       },
@@ -51,9 +54,15 @@ const sections: NavSection[] = [
     title: 'Admin',
     items: [
       {
+        title: 'Quiz',
+        url: '/quiz',
+        icon: <FileQuestionIcon />,
+        'data-testid': 'menu-item-quiz',
+      },
+      {
         title: 'Users',
         url: '/users',
-        icon: <Users />,
+        icon: <UsersIcon />,
         'data-testid': 'menu-item-users',
       },
     ],
@@ -107,7 +116,6 @@ export default async function RootLayout({
               </Content>
             </SidebarInset>
           </Layout>
-          <Toaster richColors />
         </Providers>
       </body>
     </html>

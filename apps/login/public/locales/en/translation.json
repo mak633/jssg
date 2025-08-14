@@ -22,5 +22,8 @@
     "password": "Password",
     "sign_up": "Sign up",
     "sign_in": "Sign in"
+  },
+  "error": {
+    "user_not_found": "User not found or incorrect password."
   }
 }

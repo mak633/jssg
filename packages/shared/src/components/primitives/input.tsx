@@ -13,7 +13,7 @@ function Input({
   ...props
 }: React.ComponentProps<'input'> & InputProps) {
   return (
-    <div className='px-px'>
+    <div className="px-px">
       <input
         type={type}
         data-slot="input"

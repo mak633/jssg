@@ -15,7 +15,11 @@ import { Question, QuestionType } from '@shared/types/quiz';
 
 import { hideQuestion } from '@/utils/filter-quiz';
 
-const renderQuestion = (question: Question, t: TFunction<"translation", string>, tPrefix: string) => {
+const renderQuestion = (
+  question: Question,
+  t: TFunction<'translation', string>,
+  tPrefix: string
+) => {
   switch (question.type) {
     case QuestionType.ShortString:
       return <ShortStringForm {...question} t={t} tPrefix={tPrefix} />;
@@ -28,7 +32,7 @@ const renderQuestion = (question: Question, t: TFunction<"translation", string>,
     case QuestionType.Boolean:
       return <BooleanForm {...question} t={t} tPrefix={tPrefix} />;
     case QuestionType.OneChoice:
-      return <OneChoiceForm {...question} t={t} tPrefix={tPrefix}/>;
+      return <OneChoiceForm {...question} t={t} tPrefix={tPrefix} />;
     case QuestionType.MultipleChoice:
       return <MultipleChoiceForm {...question} t={t} tPrefix={tPrefix} />;
     default:

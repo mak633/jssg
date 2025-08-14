@@ -47,10 +47,10 @@ export function AdminLoginForm() {
       redirect(environment.ADMIN_UI_BASE_URL);
     } else {
       form.setError('email', {
-        message: 'User not found or incorrect password',
+        message: t(TranslationKeys.error.user_not_found),
       });
       form.setError('password', {
-        message: 'User not found or incorrect password',
+        message: t(TranslationKeys.error.user_not_found),
       });
     }
   };

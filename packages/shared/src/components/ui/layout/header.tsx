@@ -1,14 +1,12 @@
 'use client';
 
-import { Settings, LogOut } from 'lucide-react';
-import Link from 'next/link';
+import { LogOut } from 'lucide-react';
 import { PropsWithChildren } from 'react';
 
 import { Button } from '@shared/components/primitives/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
@@ -46,18 +44,6 @@ export function Header({ children }: PropsWithChildren) {
               </p>
             </div>
           </DropdownMenuLabel>
-          <DropdownMenuSeparator />
-          <DropdownMenuGroup>
-            <DropdownMenuItem>
-              <Link
-                href="/settings/appearance"
-                className="flex w-full items-center space-x-2.5"
-              >
-                <Settings className="size-4" />
-                <p className="text-sm">Settings</p>
-              </Link>
-            </DropdownMenuItem>
-          </DropdownMenuGroup>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={handleSignOut}>
             <div className="flex w-full items-center space-x-2.5">

@@ -4,12 +4,12 @@ import { useTranslation } from 'react-i18next';
 
 import { TranslationKeys } from '@/utils/translation-keys';
 
-export default function Dashboard() {
+export default function Quiz() {
   const { t } = useTranslation();
 
   return (
     <h2 className="text-2xl font-bold tracking-tight">
-      {t(TranslationKeys.dashboard.welcome)}
+      {t(TranslationKeys.quiz.title)}
     </h2>
   );
 }

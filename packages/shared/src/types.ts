@@ -29,3 +29,8 @@ export type Base = {
   updatedBy: string;
   isDeleted: boolean;
 };
+
+export type PaginatedResponse<T> = {
+  count?: number;
+  value: T[];
+};

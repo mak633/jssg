@@ -121,4 +121,4 @@ export interface Quiz {
   version?: string;
 }
 
-export type QuizAnswers = Record<string, Answer>
+export type QuizAnswers = Record<string, Answer>;

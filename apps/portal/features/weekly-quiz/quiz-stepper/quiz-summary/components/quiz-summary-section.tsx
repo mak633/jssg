@@ -40,7 +40,7 @@ export const QuizSummarySection = ({
   }, [getValues, quiz.questions, quiz.sections, sectionId]);
 
   return (
-    <div >
+    <div>
       <div className="mb-3 flex flex-row items-center">
         <h3 className="mr-6 text-lg font-medium">
           {t(`${quiz.id}.${quiz.sections[sectionId].title}`)}

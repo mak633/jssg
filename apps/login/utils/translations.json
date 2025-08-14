@@ -22,5 +22,8 @@
     "password": "common.password",
     "sign_up": "common.sign_up",
     "sign_in": "common.sign_in"
+  },
+  "error": {
+    "user_not_found": "error.user_not_found"
   }
 }

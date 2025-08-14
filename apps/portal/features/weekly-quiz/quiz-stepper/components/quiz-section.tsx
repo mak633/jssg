@@ -10,13 +10,17 @@ import { TranslationKeys } from '@/utils/translation-keys';
 import { QuizQuestion } from './quiz-question';
 
 type QuizSectionProps = {
-  quizId: string
+  quizId: string;
   section: Section;
   questions: Record<string, Question>;
 };
 
-export const QuizSection = ({ quizId, section, questions }: QuizSectionProps) => {
-  const {t} = useTranslation()
+export const QuizSection = ({
+  quizId,
+  section,
+  questions,
+}: QuizSectionProps) => {
+  const { t } = useTranslation();
   const { prevStep, nextStep, isFirstStep } = useStepper();
   const form = useFormContext();
 
@@ -33,9 +37,15 @@ export const QuizSection = ({ quizId, section, questions }: QuizSectionProps) =>
 
   return (
     <div className="mt-8 flex flex-1 flex-col gap-8">
-      <h2 className="text-lg font-semibold">{t(`${quizId}.${section.title}`)}</h2>
+      <h2 className="text-lg font-semibold">
+        {t(`${quizId}.${section.title}`)}
+      </h2>
       {section.qIds.map((questionId) => (
-        <QuizQuestion key={questionId} quizId={quizId} question={questions[questionId]} />
+        <QuizQuestion
+          key={questionId}
+          quizId={quizId}
+          question={questions[questionId]}
+        />
       ))}
       <div className="mt-auto text-right">
         {!isFirstStep && (

@@ -27,15 +27,8 @@ const verticalStepVariants = cva(
   {
     variants: {
       variant: {
-        circle: cn(
+        circle:
           '[&:not(:last-child)]:pb-[var(--step-gap)] [&:not(:last-child)]:gap-[var(--step-gap)]',
-          // "[&:not(:last-child)]:after:content-[''] [&:not(:last-child)]:after:w-[2px] [&:not(:last-child)]:after:bg-border",
-          // '[&:not(:last-child)]:after:inset-x-[calc(var(--step-icon-size)/2)]',
-          // '[&:not(:last-child)]:after:absolute',
-          // '[&:not(:last-child)]:after:top-[calc(var(--step-icon-size)+var(--step-gap))]',
-          // '[&:not(:last-child)]:after:bottom-[var(--step-gap)]',
-          // '[&:not(:last-child)]:after:transition-all [&:not(:last-child)]:after:duration-200'
-        ),
         line: 'flex-1 border-t-0 mb-4',
       },
     },
@@ -80,8 +73,6 @@ const VerticalStep = React.forwardRef<HTMLDivElement, VerticalStepProps>(
     const opacity = hasVisited ? 1 : 0.8;
     const localIsLoading = isLoading || state === 'loading';
     const localIsError = isError || state === 'error';
-
-    const isLastStep = index === steps.length - 1;
 
     const active =
       variant === 'line' ? isCompletedStep || isCurrentStep : isCompletedStep;
@@ -179,7 +170,6 @@ const VerticalStep = React.forwardRef<HTMLDivElement, VerticalStepProps>(
         <div
           className={cn(
             'stepper__vertical-step-content',
-            // !isLastStep && 'min-h-4',
             variant !== 'line' && 'ps-[--step-icon-size]',
             variant === 'line' && orientation === 'vertical' && 'min-h-0',
             styles?.['vertical-step-content']

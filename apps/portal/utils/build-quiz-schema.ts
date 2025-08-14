@@ -22,9 +22,7 @@ function evaluateCondition(
   }
 }
 
-export function buildQuizSchema(
-  quiz: Quiz
-): z.ZodType<Record<string, Answer>> {
+export function buildQuizSchema(quiz: Quiz): z.ZodType<Record<string, Answer>> {
   return z
     .object({})
     .catchall(z.any())

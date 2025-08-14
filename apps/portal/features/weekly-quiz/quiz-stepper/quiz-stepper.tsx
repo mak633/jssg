@@ -22,7 +22,7 @@ type QuizStepperProps = {
 };
 
 export const QuizStepper = ({ quiz, onSubmit }: QuizStepperProps) => {
-  const {t} = useTranslation()
+  const { t } = useTranslation();
   const schema = useMemo(() => buildQuizSchema(quiz), [quiz]);
   type Inputs = z.infer<typeof schema>;
 
@@ -51,7 +51,10 @@ export const QuizStepper = ({ quiz, onSubmit }: QuizStepperProps) => {
       >
         <Stepper initialStep={0} steps={steps}>
           {Object.keys(quiz.sections).map((sectionId) => (
-            <Step key={sectionId} label={t(`${quiz.id}.${quiz.sections[sectionId].title}`)}>
+            <Step
+              key={sectionId}
+              label={t(`${quiz.id}.${quiz.sections[sectionId].title}`)}
+            >
               <QuizSection
                 key={sectionId}
                 quizId={quiz.id}

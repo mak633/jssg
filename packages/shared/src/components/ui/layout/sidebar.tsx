@@ -77,9 +77,9 @@ export function AppSidebar({ sections, ...props }: Props) {
       <SidebarHeader className="pt-4">
         <SidebarMenu className="items-center">
           <Image
-            src="https://wealth.jsafrasarasin.com/public/assets/bjss/assets/images/bjss-theme-logo.svg"
+            src="https://jsafrasarasin.com/etc.clientlibs/jsafrasarasin/clientlibs/clientlib-react/resources/static/media/JSS-shield-blue.9855b881e3cbfc3c8c1ca94cc967da47.svg"
             alt="Logo"
-            width="180"
+            width="80"
             height="30"
             priority
           />
