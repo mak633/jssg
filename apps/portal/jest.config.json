@@ -1,0 +1,12 @@
+{
+  "preset": "ts-jest",
+  "testEnvironment": "node",
+  "moduleNameMapper": {
+    "^@shared/(.*)$": "<rootDir>/../../packages/shared/src/$1"
+  },
+  "setupFilesAfterEnv": ["<rootDir>/jest.setup.ts"],
+  "testMatch": [
+    "**/__tests__/**/*.test.ts",
+    "**/*.test.ts"
+  ]
+}

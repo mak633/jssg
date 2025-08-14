@@ -8,6 +8,8 @@
     "start": "next start",
     "lint": "next lint --dir .",
     "lint:fix": "next lint --dir . --fix",
+    "test": "jest",
+    "test:watch": "jest --watch",
     "e2e": "playwright"
   },
   "dependencies": {
@@ -30,14 +32,18 @@
     "@playwright/test": "1.53.0",
     "@tailwindcss/postcss": "catalog:",
     "@tanstack/react-query-devtools": "5.76.2",
+    "@testing-library/jest-dom":  "catalog:",
+    "@types/jest":  "catalog:",
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "@ui/config": "workspace:*",
     "@ui/eslint-config": "workspace:*",
     "autoprefixer": "10.4.21",
+    "jest":  "catalog:",
     "postcss": "catalog:",
     "tailwindcss": "catalog:",
+    "ts-jest": "catalog:",
     "typescript": "catalog:"
   }
 }

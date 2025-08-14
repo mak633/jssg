@@ -13,7 +13,9 @@
     "lint:fix": "turbo run lint:fix",
     "format:fix": "prettier --write \"**/*.{ts,tsx,md}\"",
     "format": "prettier --check \"**/*.{ts,tsx,md}\"",
-    "knip": "knip"
+    "knip": "knip",
+    "test": "turbo run test",
+    "test:watch": "turbo run test:watch"
   },
   "devDependencies": {
     "@tanstack/eslint-plugin-query": "5.74.7",
