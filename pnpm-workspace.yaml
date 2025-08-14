@@ -27,4 +27,3 @@ catalog:
   '@tanstack/react-query-devtools': 5.76.2
   '@testing-library/jest-dom': 6.7.0
   '@types/jest': 30.0.0
-  
