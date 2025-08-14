@@ -7,7 +7,7 @@ describe('buildQuizSchema', () => {
     id: 'test-quiz',
     title: 'Test Quiz',
     startQId: 'q1',
-    status: QuizStatus.Published,
+    status: QuizStatus.Active,
     version: '1.0.0',
     sections: {
       s1: {

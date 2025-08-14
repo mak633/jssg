@@ -14,13 +14,11 @@
   },
   "dependencies": {
     "@tanstack/react-query": "catalog:",
-    "@tanstack/react-table": "catalog:",
     "@ui/shared": "workspace:*",
     "axios": "1.11.0",
     "i18next": "catalog:",
     "i18next-browser-languagedetector": "catalog:",
     "next": "catalog:",
-    "next-i18next": "catalog:",
     "react": "catalog:",
     "react-cookie": "catalog:",
     "react-dom": "catalog:",

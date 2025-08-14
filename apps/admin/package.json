@@ -20,11 +20,9 @@
     "i18next": "catalog:",
     "i18next-browser-languagedetector": "catalog:",
     "next": "catalog:",
-    "next-i18next": "catalog:",
     "react": "catalog:",
     "react-cookie": "catalog:",
     "react-dom": "catalog:",
-    "react-hook-form": "catalog:",
     "react-i18next": "catalog:",
     "zod": "catalog:"
   },

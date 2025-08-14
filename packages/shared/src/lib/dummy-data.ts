@@ -32,7 +32,7 @@ export const initialQuiz: Quiz = {
   id: 'tech-conf-2025',
   title: 'quiz_title',
   startQId: 'q1_attendee_type',
-  status: QuizStatus.Published,
+  status: QuizStatus.Active,
   version: '1.0.0',
 
   sections: {
