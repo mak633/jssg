@@ -22,7 +22,6 @@ RUN pnpm install
 COPY --from=builder /app/out/full/ .
 COPY turbo.json turbo.json
 
-ARG NEXT_PUBLIC_IDENTITY_SERVICE_BASE_URL
 ARG NEXT_PUBLIC_LOGIN_UI_BASE_URL
 ARG NEXT_PUBLIC_API_GATEWAY_BASE_URL
 
@@ -42,9 +41,9 @@ COPY --from=installer --chown=nextjs:nodejs /app/apps/${APP_NAME}/.next/standalo
 COPY --from=installer --chown=nextjs:nodejs /app/apps/${APP_NAME}/.next/static ./apps/${APP_NAME}/.next/static
 COPY --from=installer --chown=nextjs:nodejs /app/apps/${APP_NAME}/public ./apps/${APP_NAME}/public
 
-EXPOSE 3000
+EXPOSE 2001
 
-ENV PORT=3000
+ENV PORT=2001
 ENV HOSTNAME=0.0.0.0
 ENV RUNTIME_ENVIRONMENT=docker
 

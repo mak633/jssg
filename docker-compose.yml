@@ -5,10 +5,9 @@ services:
       context: .
       dockerfile: ./apps/login/Dockerfile
       args:
-        NEXT_PUBLIC_IDENTITY_SERVICE_BASE_URL: http://localhost:1001
-        NEXT_PUBLIC_LOGIN_UI_BASE_URL: http://localhost:2000
         NEXT_PUBLIC_PORTAL_UI_BASE_URL: http://localhost:2001
         NEXT_PUBLIC_ADMIN_UI_BASE_URL: http://localhost:2002
+        NEXT_PUBLIC_API_GATEWAY_BASE_URL: http://localhost:1000
     ports:
       - 2000:2000
     restart: on-failure
@@ -19,10 +18,7 @@ services:
       context: .
       dockerfile: ./apps/portal/Dockerfile
       args:
-        NEXT_PUBLIC_IDENTITY_SERVICE_BASE_URL: http://localhost:1001
         NEXT_PUBLIC_LOGIN_UI_BASE_URL: http://localhost:2000
-        NEXT_PUBLIC_PORTAL_UI_BASE_URL: http://localhost:2001
-        NEXT_PUBLIC_ADMIN_UI_BASE_URL: http://localhost:2002
         NEXT_PUBLIC_API_GATEWAY_BASE_URL: http://localhost:1000
     ports:
       - 2001:2001
@@ -34,10 +30,7 @@ services:
       context: .
       dockerfile: ./apps/admin/Dockerfile
       args:
-        NEXT_PUBLIC_IDENTITY_SERVICE_BASE_URL: http://localhost:1001
         NEXT_PUBLIC_LOGIN_UI_BASE_URL: http://localhost:2000
-        NEXT_PUBLIC_PORTAL_UI_BASE_URL: http://localhost:2001
-        NEXT_PUBLIC_ADMIN_UI_BASE_URL: http://localhost:2002
         NEXT_PUBLIC_API_GATEWAY_BASE_URL: http://localhost:1000
     ports:
       - 2002:2002

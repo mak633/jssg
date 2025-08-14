@@ -1,16 +1,13 @@
 import { z } from 'zod';
 
 const schema = z.object({
-  API_GATEWAY_BASE_URL: z
-    .string()
-    .url()
-    .optional()
-    .or(z.literal(''))
-    .default(''),
+  LOGIN_UI_BASE_URL: z.string().url(),
+  API_GATEWAY_BASE_URL: z.string().url(),
 });
 
 const data = {
   API_GATEWAY_BASE_URL: process.env.NEXT_PUBLIC_API_GATEWAY_BASE_URL,
+  LOGIN_UI_BASE_URL: process.env.NEXT_PUBLIC_LOGIN_UI_BASE_URL,
 };
 
 export const environment = schema.parse(data);

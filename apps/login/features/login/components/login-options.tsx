@@ -1,9 +1,7 @@
 import Link from 'next/link';
-import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { buttonVariants } from '@shared/components/primitives/button';
-import { DUMMY_USERS_RECORD, dummyUsers } from '@shared/lib/dummy-data';
 import { cn } from '@shared/lib/utils';
 
 import { TranslationKeys } from '@/utils/translation-keys';
@@ -12,12 +10,6 @@ import { LoginForm } from './login-form';
 
 export function LoginOptions() {
   const { t } = useTranslation();
-
-  useEffect(() => {
-    if (!localStorage.getItem(DUMMY_USERS_RECORD)) {
-      localStorage.setItem(DUMMY_USERS_RECORD, JSON.stringify(dummyUsers));
-    }
-  }, []);
 
   return (
     <>

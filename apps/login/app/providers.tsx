@@ -9,6 +9,8 @@ import { z } from 'zod';
 import { ThemeProvider } from '@shared/components/theme-provider';
 import { themeSchema } from '@shared/lib/theme-utils';
 
+import { MockUsers } from '@/components/mock-users';
+
 type Props = {
   initialTheme?: z.infer<typeof themeSchema>;
   initialColorMode?: 'light' | 'dark';
@@ -21,6 +23,7 @@ export function Providers({
 }: PropsWithChildren<Props>) {
   return (
     <CookiesProvider>
+      <MockUsers />
       <ThemeProvider
         initialTheme={initialTheme}
         initialColorMode={initialColorMode}

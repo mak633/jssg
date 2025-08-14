@@ -7,7 +7,7 @@ import { PropsWithChildren } from 'react';
 
 import { Toaster } from '@shared/components/primitives/sonner';
 import { ThemeToggle } from '@shared/components/ui/theme-toggle';
-import { dummyToken } from '@shared/lib/dummy-data';
+import { dummyTokenPath } from '@shared/lib/dummy-data';
 import {
   defaultThemePresets,
   generateThemeCSS,
@@ -36,12 +36,13 @@ export default async function RootLayout({
   children,
 }: Readonly<PropsWithChildren>) {
   const cookieStore = await cookies();
-  const cookieToken = cookieStore.get(dummyToken);
+  const cookieToken = cookieStore.get(dummyTokenPath);
 
   if (cookieToken) {
     if (cookieToken.value.includes('dummyUserJWT')) {
       redirect(environment.PORTAL_UI_BASE_URL);
-    } else if (cookieToken.value.includes('dummyAdminJWT')) {
+    }
+    if (cookieToken.value.includes('dummyAdminJWT')) {
       redirect(environment.ADMIN_UI_BASE_URL);
     }
   }

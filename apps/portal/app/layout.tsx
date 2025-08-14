@@ -6,8 +6,7 @@ import { PropsWithChildren } from 'react';
 
 import { ScrollArea } from '@shared/components/primitives/scroll-area';
 import { Toaster } from '@shared/components/primitives/sonner';
-import { ThemeToggle } from '@shared/components/ui/theme-toggle';
-import { dummyToken } from '@shared/lib/dummy-data';
+import { dummyTokenPath, dummyUsersRecord } from '@shared/lib/dummy-data';
 import {
   defaultThemePresets,
   generateThemeCSS,
@@ -16,6 +15,7 @@ import {
 import { cn, getUser } from '@shared/lib/utils';
 import { ColorMode } from '@shared/types/base';
 
+import { HeaderContent } from '@/components/header-content';
 import { HeaderLogo } from '@/components/header-logo';
 import { environment } from '@/environment';
 
@@ -39,9 +39,11 @@ export default async function RootLayout({
 
   const theme = cookieStore.get('theme')?.value;
   const colorMode = cookieStore.get('color-mode')?.value as ColorMode;
-  const token = cookieStore.get(dummyToken)?.value ?? '';
-
-  const user = await getUser(token, environment.LOGIN_UI_BASE_URL);
+  const token = cookieStore.get(dummyTokenPath)?.value ?? '';
+  const cookiesUsers = cookieStore.get(dummyUsersRecord)?.value ?? '';
+  const users = JSON.parse(cookiesUsers || '[]');
+  
+  const user = await getUser(token, environment.LOGIN_UI_BASE_URL, users);
 
   const parsedTheme = themeSchema.safeParse(JSON.parse(theme ?? '{}'));
 
@@ -68,9 +70,7 @@ export default async function RootLayout({
           initialTheme={currentTheme}
           initialColorMode={colorMode}
         >
-          <div className="absolute flex w-full items-center justify-between p-6">
-            <ThemeToggle />
-          </div>
+          <HeaderContent />
           <HeaderLogo />
           <main className="flex h-screen w-full flex-col items-center justify-center px-4 pb-4 pt-16">
             <div className="rounded-4xl max-h-220 bg-background size-full max-w-4xl overflow-hidden">

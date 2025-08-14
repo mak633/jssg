@@ -2,16 +2,16 @@ import { clsx, type ClassValue } from 'clsx';
 import { redirect } from 'next/navigation';
 import { twMerge } from 'tailwind-merge';
 
-import { dummyUsers } from './dummy-data';
+import { User, UserRole } from '@shared/types/user';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export async function getUser(token: string, redirectUri: string) {
-  const user = dummyUsers.find((u) => u.token === token);
+export async function getUser(token: string, redirectUri: string, users: User[], isAdmin?: boolean) {
+  const user = users.find((u) => u.token === token);
 
-  if (user) {
+  if (user && !(isAdmin && user.role !== UserRole.Admin)) {
     return user;
   } else {
     redirect(redirectUri);

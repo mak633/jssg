@@ -24,6 +24,7 @@
     "sign_in": "Sign in"
   },
   "error": {
-    "user_not_found": "User not found or incorrect password."
+    "user_not_found": "User not found or incorrect password.",
+    "user_already_exists": "User already exists."
   }
 }

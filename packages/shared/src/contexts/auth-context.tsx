@@ -7,8 +7,10 @@ import {
 } from 'react';
 import { useCookies } from 'react-cookie';
 
-import { dummyToken } from '@shared/lib/dummy-data';
+import { dummyTokenPath } from '@shared/lib/dummy-data';
 import { User } from '@shared/types/user';
+import { redirect } from 'next/navigation';
+import { environment } from '@shared/environment';
 
 type AuthContextType = {
   user: User;
@@ -23,10 +25,11 @@ type Props = {
 };
 
 export function AuthProvider({ children, user }: Props) {
-  const [_cookies, removeCookie] = useCookies([dummyToken]);
+  const [_cookies, _setCookie, removeCookie] = useCookies();
 
   const handleSignout = useCallback(() => {
-    removeCookie(dummyToken, { path: '/' });
+    removeCookie(dummyTokenPath, { path: '/' });
+    redirect(environment.LOGIN_UI_BASE_URL);
   }, [removeCookie]);
 
   const value = useMemo(

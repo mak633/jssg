@@ -1,9 +1,9 @@
 import { QuestionType, Quiz, QuizStatus } from '@shared/types/quiz';
 import { User, UserRole } from '@shared/types/user';
 
-export const DUMMY_USERS_RECORD = 'dummyUsers';
+export const dummyUsersRecord = 'dummyUsers';
 
-export const dummyToken = 'dummyToken';
+export const dummyTokenPath = 'dummyTokenPath';
 export const dummyUserJWT = 'dummyUserJWT';
 export const dummyAdminJWT = 'dummyAdminJWT';
 

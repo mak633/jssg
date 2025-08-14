@@ -1,6 +1,6 @@
 FROM node:20-alpine AS base
 
-ENV APP_NAME="portal"
+ENV APP_NAME="admin"
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable && corepack prepare pnpm@9.1.4 --activate
@@ -23,10 +23,8 @@ RUN pnpm install
 COPY --from=builder /app/out/full/ .
 COPY turbo.json turbo.json
 
-ARG NEXT_PUBLIC_IDENTITY_SERVICE_BASE_URL
 ARG NEXT_PUBLIC_LOGIN_UI_BASE_URL
 ARG NEXT_PUBLIC_API_GATEWAY_BASE_URL
-ARG NEXT_PUBLIC_WATCHER_SERVICE_BASE_URL
 
 RUN pnpm turbo build --filter=${APP_NAME}...
 
@@ -44,9 +42,9 @@ COPY --from=installer --chown=nextjs:nodejs /app/apps/${APP_NAME}/.next/standalo
 COPY --from=installer --chown=nextjs:nodejs /app/apps/${APP_NAME}/.next/static ./apps/${APP_NAME}/.next/static
 COPY --from=installer --chown=nextjs:nodejs /app/apps/${APP_NAME}/public ./apps/${APP_NAME}/public
 
-EXPOSE 3000
+EXPOSE 2002
 
-ENV PORT=3000
+ENV PORT=2002
 ENV HOSTNAME=0.0.0.0
 ENV RUNTIME_ENVIRONMENT=docker
 

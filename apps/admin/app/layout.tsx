@@ -14,7 +14,7 @@ import { Content } from '@shared/components/ui/layout/content';
 import { Header } from '@shared/components/ui/layout/header';
 import { Layout } from '@shared/components/ui/layout/layout';
 import { AppSidebar, NavSection } from '@shared/components/ui/layout/sidebar';
-import { dummyToken } from '@shared/lib/dummy-data';
+import { dummyTokenPath, dummyUsersRecord } from '@shared/lib/dummy-data';
 import {
   defaultThemePresets,
   generateThemeCSS,
@@ -76,9 +76,11 @@ export default async function RootLayout({
 
   const theme = cookieStore.get('theme')?.value;
   const colorMode = cookieStore.get('color-mode')?.value as ColorMode;
-  const token = cookieStore.get(dummyToken)?.value ?? '';
+  const token = cookieStore.get(dummyTokenPath)?.value ?? '';
+  const cookiesUsers = cookieStore.get(dummyUsersRecord)?.value ?? '';
+  const users = JSON.parse(cookiesUsers || '[]');
 
-  const user = await getUser(token, environment.LOGIN_UI_BASE_URL);
+  const user = await getUser(token, environment.LOGIN_UI_BASE_URL, users, true);
 
   const parsedTheme = themeSchema.safeParse(JSON.parse(theme ?? '{}'));
 

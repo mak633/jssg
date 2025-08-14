@@ -1,4 +1,5 @@
 import { redirect } from 'next/navigation';
+import { useCookies } from 'react-cookie';
 import { SubmitHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
@@ -13,12 +14,13 @@ import {
 } from '@shared/components/primitives/form';
 import { Input } from '@shared/components/primitives/input';
 import { useZodForm } from '@shared/hooks/use-zod-form';
-import { DUMMY_USERS_RECORD } from '@shared/lib/dummy-data';
+import { dummyUsersRecord } from '@shared/lib/dummy-data';
 import { User, UserInputs, UserRole, userSchema } from '@shared/types/user';
 
 import { TranslationKeys } from '@/utils/translation-keys';
 
 export function RegisterForm() {
+  const [cookies, setCookies] = useCookies();
   const { t } = useTranslation();
   const form = useZodForm({
     schema: userSchema,
@@ -31,17 +33,23 @@ export function RegisterForm() {
   });
 
   const onSubmit: SubmitHandler<UserInputs> = async (data: UserInputs) => {
-    const users = JSON.parse(localStorage.getItem(DUMMY_USERS_RECORD) || '[]');
+    const users = cookies[dummyUsersRecord] || '[]';
+
+    if (users.some((u: User) => u.email === data.email)) {
+      form.setError('email', {
+        message: t(TranslationKeys.error.user_already_exists),
+      });
+
+      return;
+    }
+
     const newUser: User = {
       ...data,
       id: String(users.length + 1),
       role: UserRole.User,
       token: `dummyUserJWT-${users.length + 1}`,
     };
-    localStorage.setItem(
-      DUMMY_USERS_RECORD,
-      JSON.stringify([...users, newUser])
-    );
+    setCookies(dummyUsersRecord, JSON.stringify([...users, newUser]));
     redirect('/');
   };
 
