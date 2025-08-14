@@ -3,7 +3,7 @@ FROM node:20-alpine AS base
 ENV APP_NAME="admin"
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
-RUN corepack enable && corepack prepare pnpm@9.1.4 --activate
+RUN corepack enable && corepack prepare pnpm@10.12.1 --activate
 
 FROM base AS builder
 WORKDIR /app
