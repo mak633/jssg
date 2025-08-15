@@ -1,3 +1,4 @@
+import { redirect } from 'next/navigation';
 import {
   createContext,
   ReactNode,
@@ -7,10 +8,9 @@ import {
 } from 'react';
 import { useCookies } from 'react-cookie';
 
+import { environment } from '@shared/environment';
 import { dummyTokenPath } from '@shared/lib/dummy-data';
 import { User } from '@shared/types/user';
-import { redirect } from 'next/navigation';
-import { environment } from '@shared/environment';
 
 type AuthContextType = {
   user: User;

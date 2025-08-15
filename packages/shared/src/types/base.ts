@@ -18,7 +18,6 @@ export type PaginatedResponse<T> = {
   value: T[];
 };
 
-
 export type ErrorResponse<T> = {
   status: number;
   message: string;

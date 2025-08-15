@@ -5,9 +5,9 @@ import { UserMenu } from '@shared/components/ui/user/user-menu';
 
 export function HeaderContent() {
   return (
-          <div className="absolute flex w-full items-center justify-between p-6">
-            <ThemeToggle />
-            <UserMenu />
-          </div>
+    <div className="absolute flex w-full items-center justify-between p-6">
+      <ThemeToggle />
+      <UserMenu />
+    </div>
   );
 }

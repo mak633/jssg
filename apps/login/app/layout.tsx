@@ -83,7 +83,7 @@ export default async function RootLayout({
             />
           </div>
           <div className="flex h-screen w-full flex-col items-center justify-between p-4">
-            <div className="rounded-4xl max-w-lg w-full bg-background my-auto p-6 md:p-12">
+            <div className="rounded-4xl bg-background my-auto w-full max-w-lg p-6 md:p-12">
               {children}
             </div>
             <TermsOfUse />

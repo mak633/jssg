@@ -8,7 +8,12 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export async function getUser(token: string, redirectUri: string, users: User[], isAdmin?: boolean) {
+export async function getUser(
+  token: string,
+  redirectUri: string,
+  users: User[],
+  isAdmin?: boolean
+) {
   const user = users.find((u) => u.token === token);
 
   if (user && !(isAdmin && user.role !== UserRole.Admin)) {
@@ -16,7 +21,7 @@ export async function getUser(token: string, redirectUri: string, users: User[],
   } else {
     redirect(redirectUri);
   }
-};
+}
 
 export const formatDate = (date?: Date) =>
   date &&

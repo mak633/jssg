@@ -97,7 +97,11 @@ describe('buildQuizSchema', () => {
             id: 'q2_speaker_title',
             title: 'Speaker Title',
             type: QuestionType.ShortString,
-            requiredWhen: { op: 'eq', qId: 'q1_attendee_type', value: 'speaker' },
+            requiredWhen: {
+              op: 'eq',
+              qId: 'q1_attendee_type',
+              value: 'speaker',
+            },
             validation: { minLength: 5, maxLength: 120 },
             nextQuestionId: 'END',
           },
@@ -137,7 +141,11 @@ describe('buildQuizSchema', () => {
             id: 'q2_speaker_title',
             title: 'Speaker Title',
             type: QuestionType.ShortString,
-            requiredWhen: { op: 'eq', qId: 'q1_attendee_type', value: 'speaker' },
+            requiredWhen: {
+              op: 'eq',
+              qId: 'q1_attendee_type',
+              value: 'speaker',
+            },
             validation: { minLength: 5, maxLength: 120 },
             nextQuestionId: 'END',
           },
@@ -172,7 +180,11 @@ describe('buildQuizSchema', () => {
             id: 'q2_speaker_title',
             title: 'Speaker Title',
             type: QuestionType.ShortString,
-            requiredWhen: { op: 'eq', qId: 'q1_attendee_type', value: 'speaker' },
+            requiredWhen: {
+              op: 'eq',
+              qId: 'q1_attendee_type',
+              value: 'speaker',
+            },
             validation: { minLength: 5, maxLength: 120 },
             nextQuestionId: 'END',
           },
@@ -182,14 +194,19 @@ describe('buildQuizSchema', () => {
       const schema = buildQuizSchema(quiz);
 
       // When speaker is selected with short title
-      const invalidData = { q1_attendee_type: 'speaker', q2_speaker_title: 'abc' };
+      const invalidData = {
+        q1_attendee_type: 'speaker',
+        q2_speaker_title: 'abc',
+      };
       const result = schema.safeParse(invalidData);
 
       expect(result.success).toBe(false);
       if (!result.success) {
         expect(result.error.issues).toHaveLength(1);
         expect(result.error.issues[0].path).toEqual(['q2_speaker_title']);
-        expect(result.error.issues[0].message).toBe('Minimum 5 characters required');
+        expect(result.error.issues[0].message).toBe(
+          'Minimum 5 characters required'
+        );
       }
     });
 
@@ -212,7 +229,11 @@ describe('buildQuizSchema', () => {
             id: 'q2_speaker_title',
             title: 'Speaker Title',
             type: QuestionType.ShortString,
-            requiredWhen: { op: 'eq', qId: 'q1_attendee_type', value: 'speaker' },
+            requiredWhen: {
+              op: 'eq',
+              qId: 'q1_attendee_type',
+              value: 'speaker',
+            },
             validation: { minLength: 5, maxLength: 120 },
             nextQuestionId: 'END',
           },
@@ -222,7 +243,10 @@ describe('buildQuizSchema', () => {
       const schema = buildQuizSchema(quiz);
 
       // When speaker is selected with valid title
-      const validData = { q1_attendee_type: 'speaker', q2_speaker_title: 'Chief Technology Officer' };
+      const validData = {
+        q1_attendee_type: 'speaker',
+        q2_speaker_title: 'Chief Technology Officer',
+      };
       const result = schema.safeParse(validData);
 
       expect(result.success).toBe(true);
@@ -252,7 +276,9 @@ describe('buildQuizSchema', () => {
 
       expect(result.success).toBe(false);
       if (!result.success) {
-        expect(result.error.issues[0].message).toBe('Minimum 3 characters required');
+        expect(result.error.issues[0].message).toBe(
+          'Minimum 3 characters required'
+        );
       }
     });
 
@@ -278,7 +304,9 @@ describe('buildQuizSchema', () => {
 
       expect(result.success).toBe(false);
       if (!result.success) {
-        expect(result.error.issues[0].message).toBe('Maximum 5 characters allowed');
+        expect(result.error.issues[0].message).toBe(
+          'Maximum 5 characters allowed'
+        );
       }
     });
 
@@ -366,7 +394,9 @@ describe('buildQuizSchema', () => {
 
       expect(result.success).toBe(false);
       if (!result.success) {
-        expect(result.error.issues[0].message).toBe('Please select at least 2 options');
+        expect(result.error.issues[0].message).toBe(
+          'Please select at least 2 options'
+        );
       }
     });
 
@@ -397,7 +427,9 @@ describe('buildQuizSchema', () => {
 
       expect(result.success).toBe(false);
       if (!result.success) {
-        expect(result.error.issues[0].message).toBe('Please select no more than 2 options');
+        expect(result.error.issues[0].message).toBe(
+          'Please select no more than 2 options'
+        );
       }
     });
   });
@@ -451,7 +483,9 @@ describe('buildQuizSchema', () => {
 
       expect(result.success).toBe(false);
       if (!result.success) {
-        expect(result.error.issues[0].message).toBe('Value must be at least 18');
+        expect(result.error.issues[0].message).toBe(
+          'Value must be at least 18'
+        );
       }
     });
 
@@ -477,7 +511,9 @@ describe('buildQuizSchema', () => {
 
       expect(result.success).toBe(false);
       if (!result.success) {
-        expect(result.error.issues[0].message).toBe('Value must be at most 120');
+        expect(result.error.issues[0].message).toBe(
+          'Value must be at most 120'
+        );
       }
     });
   });
@@ -580,7 +616,9 @@ describe('buildQuizSchema', () => {
 
       expect(result.success).toBe(false);
       if (!result.success) {
-        expect(result.error.issues[0].message).toBe('Date must be after 2025-01-01');
+        expect(result.error.issues[0].message).toBe(
+          'Date must be after 2025-01-01'
+        );
       }
     });
 
@@ -606,7 +644,9 @@ describe('buildQuizSchema', () => {
 
       expect(result.success).toBe(false);
       if (!result.success) {
-        expect(result.error.issues[0].message).toBe('Date must be before 2025-12-31');
+        expect(result.error.issues[0].message).toBe(
+          'Date must be before 2025-12-31'
+        );
       }
     });
   });
@@ -734,7 +774,11 @@ describe('buildQuizSchema', () => {
             id: 'q2_speaker_title',
             title: 'Speaker Title',
             type: QuestionType.ShortString,
-            requiredWhen: { op: 'eq', qId: 'q1_attendee_type', value: 'speaker' },
+            requiredWhen: {
+              op: 'eq',
+              qId: 'q1_attendee_type',
+              value: 'speaker',
+            },
             validation: { minLength: 5 },
             nextQuestionId: 'q3_need_certificate',
           },
@@ -770,7 +814,7 @@ describe('buildQuizSchema', () => {
       expect(result.success).toBe(false);
       if (!result.success) {
         expect(result.error.issues).toHaveLength(2);
-        const paths = result.error.issues.map(issue => issue.path[0]);
+        const paths = result.error.issues.map((issue) => issue.path[0]);
         expect(paths).toContain('q2_speaker_title');
         expect(paths).toContain('q4_certificate_name');
       }
@@ -795,7 +839,11 @@ describe('buildQuizSchema', () => {
             id: 'q2_speaker_title',
             title: 'Speaker Title',
             type: QuestionType.ShortString,
-            requiredWhen: { op: 'eq', qId: 'q1_attendee_type', value: 'speaker' },
+            requiredWhen: {
+              op: 'eq',
+              qId: 'q1_attendee_type',
+              value: 'speaker',
+            },
             validation: { minLength: 5, maxLength: 120 },
             nextQuestionId: 'END',
           },

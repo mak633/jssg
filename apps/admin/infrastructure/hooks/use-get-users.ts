@@ -20,7 +20,9 @@ export function useGetUsers({
   'queryKey' | 'queryFn'
 >) {
   const [cookies] = useCookies();
-  const data = Array.isArray(cookies[dummyUsersRecord]) ? cookies[dummyUsersRecord] : dummyUsers;
+  const data = Array.isArray(cookies[dummyUsersRecord])
+    ? cookies[dummyUsersRecord]
+    : dummyUsers;
 
   return useQuery({
     ...options,

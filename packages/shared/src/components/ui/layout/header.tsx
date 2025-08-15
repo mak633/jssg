@@ -3,6 +3,7 @@
 import { PropsWithChildren } from 'react';
 
 import { SidebarTrigger } from '@shared/components/primitives/sidebar';
+
 import { UserMenu } from '../user/user-menu';
 
 export function Header({ children }: PropsWithChildren) {

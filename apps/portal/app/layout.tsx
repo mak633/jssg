@@ -42,7 +42,7 @@ export default async function RootLayout({
   const token = cookieStore.get(dummyTokenPath)?.value ?? '';
   const cookiesUsers = cookieStore.get(dummyUsersRecord)?.value ?? '';
   const users = JSON.parse(cookiesUsers || '[]');
-  
+
   const user = await getUser(token, environment.LOGIN_UI_BASE_URL, users);
 
   const parsedTheme = themeSchema.safeParse(JSON.parse(theme ?? '{}'));
