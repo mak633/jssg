@@ -126,3 +126,8 @@ User data and tokens for login are stored in cookies. Cookies were chosen becaus
 
 - User - email: john@example.com , password: password123
 - Admin (can be logged in admin and in portal) - email: jane@example.com , password: password456
+
+# BE
+<img width="692" height="644" alt="Decisions and requirements" src="https://github.com/user-attachments/assets/52b7e2b7-bf84-49ba-916a-c3b43d09d9fb" />
+<img width="752" height="1007" alt="DB structure" src="https://github.com/user-attachments/assets/c8bb16ac-479b-4ecc-b39b-258a6244f7c8" />
+
