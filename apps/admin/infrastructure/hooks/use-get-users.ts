@@ -1,6 +1,7 @@
 import { useQuery, UseQueryOptions } from '@tanstack/react-query';
+import { useCookies } from 'react-cookie';
 
-import { dummyUsers } from '@shared/lib/dummy-data';
+import { dummyUsers, dummyUsersRecord } from '@shared/lib/dummy-data';
 import { PaginatedResponse, QueryOptions } from '@shared/types/base';
 import { User } from '@shared/types/user';
 
@@ -18,13 +19,16 @@ export function useGetUsers({
   UseQueryOptions<PaginatedResponse<User>>,
   'queryKey' | 'queryFn'
 >) {
+  const [cookies] = useCookies();
+  const data = Array.isArray(cookies[dummyUsersRecord]) ? cookies[dummyUsersRecord] : dummyUsers;
+
   return useQuery({
     ...options,
-    queryKey: [...keys.getUsers(query), dummyUsers.length, dummyUsers],
+    queryKey: [...keys.getUsers(query), data.length, data],
     queryFn: () =>
       Promise.resolve({
-        count: dummyUsers.length,
-        value: dummyUsers,
+        count: data.length,
+        value: data,
       }),
   });
 }

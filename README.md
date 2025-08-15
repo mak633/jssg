@@ -48,11 +48,11 @@ shadcn/ui can be easily modified for each project. Reusable components are locat
 Jest is used to write unit and some integration tests (only some tests were written due to limited time).
 Playwright is connected for adding e2e tests.
 
-### React Practices
+#### React Practices
 
 Uses a modified ATOMIC approach for creating components.
 
-### Docker 
+#### Docker 
 Connected to improve development and deployment. Developers can run everything in Docker and work only on the backend part, or run locally only the project they are going to modify.
 
 ## How to Run
@@ -100,3 +100,6 @@ User data and tokens for login are stored in cookies. Cookies were chosen becaus
 * [http://localhost:2001/](http://localhost:2001/) - Portal (quiz)
 * [http://localhost:2002/](http://localhost:2002/) - Admin portal
 
+## Credentials:
+* User - email: john@example.com , password: password123
+* Admin (can be logged in admin and in portal) - email: jane@example.com , password: password456
