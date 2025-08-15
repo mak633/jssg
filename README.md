@@ -1,4 +1,4 @@
-# UI for J. Safra Sarasin
+# UI
 
 ## Data Decisions
 Mock data is in `packages/shared/src/lib/dummy-data.ts` and is created based on backend ideas presented in the BE folder.
